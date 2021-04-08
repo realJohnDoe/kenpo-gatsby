@@ -1,4 +1,4 @@
-const shouldHandleFile = require("./should-handle-file");
+const shouldHandleFile = require('./should-handle-file');
 
 module.exports = (options) => {
   const { contentPath, roamUrl } = options;
@@ -21,7 +21,7 @@ module.exports = (options) => {
           excerpt
           rawBody
           frontmatter {
-            private
+            priv
           }
         }
         internal {
@@ -62,15 +62,15 @@ module.exports = (options) => {
 
   return [
     {
-      resolve: "gatsby-plugin-local-search",
+      resolve: 'gatsby-plugin-local-search',
       options: {
-        name: "paths",
-        engine: "flexsearch",
+        name: 'paths',
+        engine: 'flexsearch',
         query,
 
-        index: ["path"],
+        index: ['path'],
 
-        store: ["id", "path", "title", "excerpt"],
+        store: ['id', 'path', 'title', 'excerpt'],
 
         normalizer: ({ data }) => {
           let result = [];
@@ -78,7 +78,7 @@ module.exports = (options) => {
             result = result.concat(
               data.allFile.nodes
                 .filter((node) => shouldHandleFile(node, options))
-                .filter((x) => x.childMdx.frontmatter.private !== true)
+                .filter((x) => x.childMdx.frontmatter.priv !== true)
                 .map((node) => ({
                   id: node.id,
                   path: node.fields.slug,
@@ -110,13 +110,13 @@ module.exports = (options) => {
       },
     },
     {
-      resolve: "gatsby-plugin-local-search",
+      resolve: 'gatsby-plugin-local-search',
       options: {
-        name: "titles",
-        engine: "flexsearch",
+        name: 'titles',
+        engine: 'flexsearch',
         query,
 
-        index: ["title"],
+        index: ['title'],
 
         store: [],
 
@@ -126,7 +126,7 @@ module.exports = (options) => {
             result = result.concat(
               data.allFile.nodes
                 .filter((node) => shouldHandleFile(node, options))
-                .filter((x) => x.childMdx.frontmatter.private !== true)
+                .filter((x) => x.childMdx.frontmatter.priv !== true)
                 .map((node) => ({
                   id: node.id,
                   title: node.fields.title,
@@ -146,13 +146,13 @@ module.exports = (options) => {
       },
     },
     {
-      resolve: "gatsby-plugin-local-search",
+      resolve: 'gatsby-plugin-local-search',
       options: {
-        name: "bodies",
-        engine: "flexsearch",
+        name: 'bodies',
+        engine: 'flexsearch',
         query,
 
-        index: ["body"],
+        index: ['body'],
 
         store: [],
 
@@ -162,7 +162,7 @@ module.exports = (options) => {
             result = result.concat(
               data.allFile.nodes
                 .filter((node) => shouldHandleFile(node, options))
-                .filter((x) => x.childMdx.frontmatter.private !== true)
+                .filter((x) => x.childMdx.frontmatter.priv !== true)
                 .map((node) => ({
                   id: node.id,
                   body: node.childMdx.rawBody,
