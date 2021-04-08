@@ -1,5 +1,5 @@
-import React from "react";
-import Reference from "./reference";
+import React from 'react';
+import Reference from './reference';
 
 const ReferencesBlock = ({ references }) => {
   if (!references.length) {

@@ -1,16 +1,14 @@
-const colors = require("tailwindcss/colors");
-
-console.log("loading tw config...");
+const colors = require('tailwindcss/colors');
 
 module.exports = {
-  mode: "jit",
-  purge: [__dirname + "/src/**/*.{js,jsx,ts,tsx}"],
-  darkMode: "class", // or 'media' or 'class'
+  mode: 'jit',
+  purge: [`${__dirname}/src/**/*.{js,jsx,ts,tsx}`],
+  darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
       colors: {
-        refBlockLight: "#f1f5f9",
-        refBlockDark: "#161b21",
+        refBlockLight: '#f1f5f9',
+        refBlockDark: '#161b21',
         ...colors,
       },
       typography: {
@@ -27,10 +25,10 @@ module.exports = {
             h3: {
               color: null,
             },
-            "ol > li::before": {
+            'ol > li::before': {
               color: null,
             },
-            "ul > li::before": {
+            'ul > li::before': {
               backgroundColor: null,
             },
             code: null,
@@ -39,10 +37,10 @@ module.exports = {
         },
         sm: {
           css: {
-            "thead th:first-child": null,
-            "thead th:last-child": null,
-            "tbody td:first-child": null,
-            "tbody td:last-child": null,
+            'thead th:first-child': null,
+            'thead th:last-child': null,
+            'tbody td:first-child': null,
+            'tbody td:last-child': null,
           },
         },
       },
@@ -51,5 +49,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [require('@tailwindcss/typography')],
 };

@@ -1,12 +1,11 @@
-import React, { useState, useCallback } from "react";
-import { navigate } from "gatsby";
-import Downshift from "downshift";
-import useSearch from "../use-search";
-
-import "./search.css";
+import Downshift from 'downshift';
+import { navigate } from 'gatsby';
+import React, { useCallback, useState } from 'react';
+import useSearch from '../use-search';
+import './search.css';
 
 export function Search() {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
 
   const results = useSearch(query);
 
@@ -15,7 +14,7 @@ export function Search() {
   return (
     <Downshift
       onChange={(selection) => navigate(selection.path)}
-      itemToString={(item) => (item ? item.title : "")}
+      itemToString={(item) => (item ? item.title : '')}
     >
       {({
         getInputProps,
@@ -61,8 +60,8 @@ function SearchBar({ query, onChange, getInputProps }) {
       </svg>
       <input
         {...getInputProps({
-          placeholder: "Search...",
-          onChange: onChange,
+          placeholder: 'Search...',
+          onChange,
         })}
         type="text"
       />
@@ -89,8 +88,8 @@ function Results({
               style: {
                 background:
                   highlightedIndex === index
-                    ? "var(--references-bg)"
-                    : "var(--note-bg)",
+                    ? 'var(--references-bg)'
+                    : 'var(--note-bg)',
               },
             })}
           >
