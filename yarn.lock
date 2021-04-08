@@ -12665,7 +12665,7 @@ react-spring@^8.0.27:
     "@babel/runtime" "^7.3.1"
     prop-types "^15.5.8"
 
-react-stacked-pages-hook@^0.4.4:
+react-stacked-pages-hook@^0.4.6:
   version "0.4.6"
   resolved "https://registry.yarnpkg.com/react-stacked-pages-hook/-/react-stacked-pages-hook-0.4.6.tgz#71a2aaffcca8d478dc2265bdcd2a4cf79e6250ba"
   integrity sha512-Rqq/ck9PxIMmPi55HrnmKPdX0E80MpqGOzaSIuZJpXkGrBmd1GuexBJd6EKkD4zez04fDb0IXpAmWnV1DOVNqQ==
