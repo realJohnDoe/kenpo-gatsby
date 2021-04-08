@@ -1,18 +1,14 @@
 {
-  "name": "gatsby-digital-garden",
+  "name": "gatsby-philipps-foam-theme-workspace",
   "private": true,
-  "scripts": {
-    "test": "jest"
-  },
-  "author": "Mathieu Dutour <mathieu@dutour.me>",
+  "version": "0.0.1",
+  "main": "index.js",
   "license": "MIT",
-  "devDependencies": {
-    "@types/jest": "^25.2.2",
-    "@types/node": "^14.0.1",
-    "jest": "^26.0.1",
-    "jest-cli": "^26.0.1",
-    "prettier": "^2.0.5",
-    "ts-node": "^8.10.1",
-    "typescript": "^3.9.2"
-  }
+  "scripts": {
+    "build": "yarn workspace example build"
+  },
+  "workspaces": [
+    "gatsby-philipps-foam-theme",
+    "example/_layouts"
+  ]
 }
