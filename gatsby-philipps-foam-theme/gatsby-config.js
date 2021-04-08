@@ -10,9 +10,7 @@ module.exports = (options) => {
       siteUrl: `http://example.com/`,
     },
     plugins: [
-      {
-        resolve: `gatsby-plugin-postcss`,
-      },
+      `gatsby-plugin-postcss`,
       !mdxOtherwiseConfigured && `gatsby-plugin-sharp`,
       !mdxOtherwiseConfigured && `gatsby-remark-images`,
       !mdxOtherwiseConfigured && {

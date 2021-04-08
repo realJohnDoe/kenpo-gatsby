@@ -1,12 +1,15 @@
-import React from "react";
-import { basename } from "path";
-import { withPrefix } from "gatsby";
-import Tippy from "@tippyjs/react";
-import { MDXProvider } from "@mdx-js/react";
-import MDXRenderer from "./mdx-renderer";
-import { LinkToStacked } from "react-stacked-pages-hook";
+import { MDXProvider } from '@mdx-js/react';
+import Tippy from '@tippyjs/react';
+import { withPrefix } from 'gatsby';
+import React from 'react';
+import { LinkToStacked } from 'react-stacked-pages-hook';
+import './anchor-tag.css';
+import MDXRenderer from './mdx-renderer';
 
-import "./anchor-tag.css";
+const custBasename = (filePath) => {
+  const split = filePath.split('/');
+  return split[split.length - 1];
+};
 
 export const AnchorTag = ({
   title,
@@ -22,7 +25,7 @@ export const AnchorTag = ({
       withPrefix(x.slug) === withPrefix(href) ||
       x.title === title ||
       (x.aliases || []).some((alias) => alias === title) ||
-      basename(x.slug) === title
+      custBasename(x.slug) === title
   );
 
   let content;
@@ -82,7 +85,7 @@ export const AnchorTag = ({
       <a
         {...restProps}
         href={
-          !href || (href.indexOf && href.indexOf("#") === 0)
+          !href || (href.indexOf && href.indexOf('#') === 0)
             ? href
             : withPrefix(href)
         }
