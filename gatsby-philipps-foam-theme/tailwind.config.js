@@ -37,6 +37,14 @@ module.exports = {
             pre: null,
           },
         },
+        sm: {
+          css: {
+            "thead th:first-child": null,
+            "thead th:last-child": null,
+            "tbody td:first-child": null,
+            "tbody td:last-child": null,
+          },
+        },
       },
     },
   },

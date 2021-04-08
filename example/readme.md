@@ -4,3 +4,4 @@ This is an example with links
 
 - [[cool]]
 - [[code]]
+- [[text]]
