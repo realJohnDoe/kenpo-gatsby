@@ -1,10 +1,12 @@
 import React from "react";
 import useDarkMode from "use-dark-mode";
-
 import "./dark-mode-toggle.css";
 
 const DarkModeToggle = () => {
-  const { value: isDark, toggle: toggleDarkMode } = useDarkMode(false);
+  const { value: isDark, toggle: toggleDarkMode } = useDarkMode(false, {
+    classNameDark: "dark",
+    classNameLight: "light",
+  });
 
   return (
     <label

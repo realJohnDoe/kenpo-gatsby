@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.note-content {
+  @apply prose-sm;
+}
+
+/* @layer components {
+
+
+  .note-content ol > li::marker {
+    @apply font-semibold dark:text-blue-200 text-blue-800;
+  }
+} */
+
+.note-content ul {
+  @apply list-inside;
+  list-style-type: disc;
+}
+
+.note-content ol {
+  list-style: decimal;
+}
+
+.note-content ol > li {
+  @apply list-inside;
+}
+
+.note-content li > p {
+  display: inline;
+}
+
+.note-content pre {
+  padding: 0;
+}
+
+.note-content code {
+  font-size: 1em;
+  @apply rounded p-1;
+}
+
+.dark-mode .note-content code {
+  background-color: #161b21;
+}
+
+.light .note-content code {
+  background-color: #f1f5f9;
+}
+
+.CodeMirror-vscrollbar {
+  overflow: hidden !important;
+}
+
+.controls {
+  @apply space-x-4;
+}
+
+.dark-mode ::-webkit-scrollbar {
+  background-color: #0a0d11;
+  width: 12px;
+  height: 16px;
+}
+
+.dark-mode ::-webkit-scrollbar-track {
+  background-color: #0a0d11;
+}
+
+.dark-mode ::-webkit-scrollbar-thumb {
+  background-color: #282f39;
+}
+
+.dark-mode ::-webkit-scrollbar-thumb:hover {
+  background-color: #424b58;
+}
+
+.cm-editor,
+.cm-scroller {
+  outline: transparent !important;
+}
