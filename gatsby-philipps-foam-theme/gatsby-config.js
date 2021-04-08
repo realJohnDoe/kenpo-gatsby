@@ -1,4 +1,4 @@
-const searchIndexes = require("./search-indexes");
+const searchIndexes = require('./search-indexes');
 
 module.exports = (options) => {
   const {
@@ -27,8 +27,8 @@ module.exports = (options) => {
         options: {
           extensions: [`.md`, `.mdx`],
           gatsbyRemarkPlugins: [
-            "gatsby-remark-double-brackets-link",
-            "gatsby-remark-double-parenthesis-link",
+            'gatsby-remark-double-brackets-link',
+            'gatsby-remark-double-parenthesis-link',
             {
               resolve: `gatsby-remark-images`,
               options: {
@@ -45,20 +45,12 @@ module.exports = (options) => {
           ],
         },
       },
-      roamUrl && {
-        resolve: "gatsby-source-roamresearch",
-        options: {
-          url: roamUrl,
-          email: roamEmail,
-          password: roamPassword,
-        },
-      },
       contentPath && {
         resolve: `gatsby-source-filesystem`,
         options: {
           path: contentPath,
           name: contentPath,
-          ignore: ignore,
+          ignore,
         },
       },
       `gatsby-transformer-markdown-references`,

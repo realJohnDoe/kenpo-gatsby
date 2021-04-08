@@ -51,13 +51,11 @@
     "gatsby-remark-double-parenthesis-link": "^0.1.2",
     "gatsby-remark-images": "^3.11.1",
     "gatsby-source-filesystem": "^2.11.1",
-    "gatsby-source-roamresearch": "^0.4.1",
     "gatsby-transformer-markdown-references": "^0.1.5",
     "postcss": "^8.2.9",
     "react-helmet": "^6.1.0",
     "react-spring": "^8.0.27",
     "react-stacked-pages-hook": "^0.4.4",
-    "slugify": "^1.4.0",
     "tailwindcss": "^2.1.1",
     "use-dark-mode": "^2.3.1"
   },
