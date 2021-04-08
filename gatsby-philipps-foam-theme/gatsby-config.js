@@ -1,14 +1,7 @@
 const searchIndexes = require('./search-indexes');
 
 module.exports = (options) => {
-  const {
-    mdxOtherwiseConfigured = false,
-    contentPath,
-    roamUrl,
-    roamEmail,
-    roamPassword,
-    ignore,
-  } = options;
+  const { mdxOtherwiseConfigured = false, contentPath, ignore } = options;
 
   return {
     siteMetadata: {
