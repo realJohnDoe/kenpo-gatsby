@@ -5,10 +5,10 @@
   "version": "1.0.0",
   "author": "Mathieu Dutour <mathieu@dutour.me>",
   "dependencies": {
-    "gatsby": "^2.21.22",
+    "gatsby": "^2.32.12",
     "gatsby-philipps-foam-theme": "*",
-    "react": "^16.3.1",
-    "react-dom": "^16.3.1"
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
   },
   "keywords": [
     "gatsby"
