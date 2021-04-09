@@ -1,16 +1,19 @@
 {
   "name": "gatsby-philipps-foam-theme",
-  "version": "0.0.1",
-  "description": "My personal foam theme",
+  "version": "0.0.1-alpha.0",
+  "description": "My personal gatsby theme for foam",
+  "repository": {
+    "url": "https://github.com/phartenfeller/gatsby-philipps-foam-theme",
+    "directory": "packages/gatsby-philipps-foam-theme"
+  },
+  "homepage": "https://github.com/phartenfeller/gatsby-philipps-foam-theme",
+  "author": "phartenfeller",
   "main": "index.js",
   "keywords": [
     "gatsby",
     "gatsby-theme",
     "gatsby-plugin",
-    "digital-garden",
-    "react",
-    "notes",
-    "roam-research"
+    "foam"
   ],
   "license": "MIT",
   "peerDependencies": {
