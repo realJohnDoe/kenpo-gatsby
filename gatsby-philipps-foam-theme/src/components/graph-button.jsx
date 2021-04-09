@@ -1,19 +1,19 @@
-import React, { useState, lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState } from 'react';
+import './graph-button.css';
 
-import "./graph-button.css";
-
-const Graph = lazy(() => import("./graph-visualisation"));
+const Graph = lazy(() => import('./graph-visualisation'));
 
 const GraphButton = () => {
-  const [graphState, setGraphState] = useState("hidden");
+  const [graphState, setGraphState] = useState('hidden');
 
   return (
-    <React.Fragment>
+    <>
       <button
+        type="button"
         title="Show Graph visualisation"
         aria-label="Show Graph visualisation"
         className="graph-button"
-        onClick={() => setGraphState("maximized")}
+        onClick={() => setGraphState('maximized')}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -34,12 +34,12 @@ const GraphButton = () => {
           </g>
         </svg>
       </button>
-      {typeof window !== "undefined" ? (
+      {typeof window !== 'undefined' ? (
         <Suspense fallback={null}>
           <Graph graphState={graphState} setGraphState={setGraphState} />
         </Suspense>
       ) : null}
-    </React.Fragment>
+    </>
   );
 };
 

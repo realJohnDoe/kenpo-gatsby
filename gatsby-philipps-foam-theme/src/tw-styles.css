@@ -73,10 +73,6 @@
   overflow: hidden !important;
 }
 
-.controls {
-  @apply space-x-4;
-}
-
 .dark ::-webkit-scrollbar {
   background-color: #0a0d11;
   width: 12px;
