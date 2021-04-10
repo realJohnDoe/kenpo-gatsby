@@ -9,53 +9,77 @@ const G6GraphViz = ({ graphVisible, setGraphVisible }) => {
   console.log('data', { nodesData, linksData, navigate, highlight });
 
   useEffect(() => {
+    console.log('curr', graphContainerRef.current.scrollWidth);
     if (!graph) {
       const nGraph = new G6.Graph({
         container: graphContainerRef.current,
         height: 500,
-        width: 800,
+        width: 900,
         linkCenter: true,
         modes: {
           default: ['drag-canvas', 'zoom-canvas'],
         },
+        fitView: false,
         layout: {
           type: 'force',
           preventOverlap: true,
-          // inkDistance: 150, // Edge length
-          nodeSize: 130,
-          edgeStrength: 0.2,
+          linkDistance: 50, // Edge length
+          nodeStrength: -1000,
+          edgeStrength: 0.6,
+          nodeSpacing: 20,
+          collideStrength: 0.8,
+          nodeSize: 30,
+          alpha: 0.3,
+          alphaDecay: 0.028,
+          alphaMin: 0.01,
+          forceSimulation: null,
         },
         defaultNode: {
           style: {
-            opacity: 0.8,
-            lineWidth: 1,
-            stroke: '#475569',
+            size: 15,
+            style: {
+              fill: '#DEE9FF',
+              stroke: '#5B8FF9',
+            },
           },
           labelCfg: {
             position: 'bottom',
-            style: {
-              background: {
-                fill: '#ffffffd6',
-                padding: [2, 2, 2, 2],
-                radius: 4,
-                stroke: '#E2E8F0',
-              },
-            },
+          },
+        },
+        nodeStateStyles: {
+          // The node style when the state 'hover' is true
+          hover: {
+            fill: '#c9dbff',
           },
         },
         defaultEdge: {
           color: '#e2e2e2',
           style: {
-            opacity: 0.6,
-
-            endArrow: true,
+            endArrow: {
+              path: G6.Arrow.vee(7, 10, 5),
+              fill: '#e2e2e2',
+            },
           },
         },
       });
+      setGraph(nGraph);
 
-      const nodes = nodesData.map((node) => {
-        node.name = node.label;
-        return node;
+      // Mouse enter a node
+      nGraph.on('node:mouseenter', (e) => {
+        const nodeItem = e.item; // Get the target item
+        nGraph.setItemState(nodeItem, 'hover', true); // Set the state 'hover' of the item to be true
+      });
+
+      // Mouse leave a node
+      nGraph.on('node:mouseleave', (e) => {
+        const nodeItem = e.item; // Get the target item
+        nGraph.setItemState(nodeItem, 'hover', false); // Set the state 'hover' of the item to be false
+      });
+
+      nGraph.on('node:click', (e) => {
+        // eslint-disable-next-line no-underscore-dangle
+        navigate(e.item._cfg.model.slug);
+        setGraphVisible(false);
       });
 
       const edges = linksData.map((edge) => {
@@ -63,12 +87,20 @@ const G6GraphViz = ({ graphVisible, setGraphVisible }) => {
         return edge;
       });
 
-      console.log({ nodes, edges });
+      console.log({ nodes: nodesData, edges });
 
-      nGraph.data({ nodes, edges });
+      nGraph.data({ nodes: nodesData, edges });
       nGraph.render();
+    } else {
+      const edges = linksData.map((edge) => {
+        edge.id = `${edge.source}-${edge.target}`;
+        return edge;
+      });
 
-      setGraph(nGraph);
+      console.log({ nodes: nodesData, edges });
+
+      graph.data({ nodes: nodesData, edges });
+      graph.render();
     }
   }, [graph, nodesData, linksData]);
 
@@ -83,7 +115,7 @@ const G6GraphViz = ({ graphVisible, setGraphVisible }) => {
     >
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <div
-          className={`fixed inset-0 bg-gray-500 transition-opacity transition-opacity ${
+          className={`fixed inset-0 bg-gray-500 transition-opacity ${
             graphVisible
               ? 'bg-opacity-75 ease-out duration-300'
               : 'bg-opacity-0 ease-in duration-200'
@@ -101,7 +133,7 @@ const G6GraphViz = ({ graphVisible, setGraphVisible }) => {
                 X
               </button>
             </div>
-            <div className="px-4 py-5 sm:p-6">
+            <div className="">
               <div id="graph-container" ref={graphContainerRef} />
             </div>
           </div>
