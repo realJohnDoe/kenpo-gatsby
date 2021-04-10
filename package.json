@@ -1,10 +1,11 @@
 {
-  "name": "gatsby-philipps-foam-theme-workspace",
+  "name": "@phartenfeller/gatsby-philipps-foam-theme-workspace",
   "private": true,
   "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "start": "yarn workspace example develop",
     "build": "yarn workspace example build"
   },
   "workspaces": [

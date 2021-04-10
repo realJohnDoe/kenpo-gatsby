@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-example-using-roamresearch",
+  "name": "example",
   "private": true,
-  "description": "Gatsby example site using the Roam Research source plugin",
+  "description": "Gatsby example site using the gatsby-philipps-foam-theme",
   "version": "1.0.0",
-  "author": "Mathieu Dutour <mathieu@dutour.me>",
+  "author": "phartenfeller",
   "dependencies": {
     "autoprefixer": "^10.2.5",
     "gatsby": "^3.2.1",
