@@ -2,6 +2,10 @@ import { graphql } from "gatsby";
 
 export const references = graphql`
   fragment GatsbyGardenReferences on Mdx {
+    headings {
+      depth
+      value
+    }
     outboundReferences {
       ... on Mdx {
         body

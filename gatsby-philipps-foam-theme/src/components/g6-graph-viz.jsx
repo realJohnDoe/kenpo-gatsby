@@ -1,15 +1,54 @@
 import G6 from '@antv/g6';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import useThemeState from '../state/useThemeState';
 import { useGraphData } from '../use-graph-data';
+
+const prepareNodes = (nodes, darkMode) => {
+  nodes.map((n) => {
+    // eslint-disable-next-line no-param-reassign
+    if (!n.syle) n.style = {};
+    if (!n.labelCfg) n.labelCfg = {};
+    if (!n.labelCfg.style) n.labelCfg.style = {};
+    n.labelCfg.style.fill = darkMode ? '#b4bec2' : '#292929';
+    n.style.fill = darkMode ? '#35354d' : '#DEE9FF';
+    return n;
+  });
+  return nodes;
+};
+
+const prepareEdges = (edges, darkMode) => {
+  edges.map((e) => {
+    e.id = `${e.source}-${e.target}`;
+    if (!e.style) e.style = {};
+    e.style.color = darkMode ? '#737a7d' : '#e2e2e2';
+    return e;
+  });
+  return edges;
+};
 
 const G6GraphViz = ({ graphVisible, setGraphVisible }) => {
   const [nodesData, linksData, navigate, highlight] = useGraphData();
+  const { theme } = useThemeState();
   const [graph, setGraph] = useState(null);
   const graphContainerRef = useRef();
-  console.log('data', { nodesData, linksData, navigate, highlight });
+  console.log('hook Data', { nodesData, linksData, navigate, highlight });
+
+  const darkMode = theme === 'dark';
+  console.log({ darkMode });
+
+  const nodes = useMemo(() => prepareNodes(nodesData, darkMode), [
+    nodesData,
+    darkMode,
+  ]);
+  const edges = useMemo(() => prepareEdges(linksData, darkMode), [
+    linksData,
+    darkMode,
+  ]);
+
+  console.log('nodes after fct', nodes);
 
   useEffect(() => {
-    console.log('curr', graphContainerRef.current.scrollWidth);
+    console.log('rerender');
     if (!graph) {
       const nGraph = new G6.Graph({
         container: graphContainerRef.current,
@@ -38,7 +77,6 @@ const G6GraphViz = ({ graphVisible, setGraphVisible }) => {
           style: {
             size: 15,
             style: {
-              fill: '#DEE9FF',
               stroke: '#5B8FF9',
             },
           },
@@ -82,27 +120,23 @@ const G6GraphViz = ({ graphVisible, setGraphVisible }) => {
         setGraphVisible(false);
       });
 
-      const edges = linksData.map((edge) => {
-        edge.id = `${edge.source}-${edge.target}`;
-        return edge;
+      nGraph.on('node:touchstart', (e) => {
+        // eslint-disable-next-line no-underscore-dangle
+        navigate(e.item._cfg.model.slug);
+        setGraphVisible(false);
       });
 
-      console.log({ nodes: nodesData, edges });
+      console.log('data', { nodes, edges });
 
-      nGraph.data({ nodes: nodesData, edges });
+      nGraph.data({ nodes, edges });
       nGraph.render();
     } else {
-      const edges = linksData.map((edge) => {
-        edge.id = `${edge.source}-${edge.target}`;
-        return edge;
-      });
+      console.log('data', { nodes, edges });
 
-      console.log({ nodes: nodesData, edges });
-
-      graph.data({ nodes: nodesData, edges });
+      graph.data({ nodes, edges });
       graph.render();
     }
-  }, [graph, nodesData, linksData]);
+  }, [graph, edges, navigate, nodes, setGraphVisible, theme]);
 
   return (
     <div
@@ -115,22 +149,35 @@ const G6GraphViz = ({ graphVisible, setGraphVisible }) => {
     >
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <div
-          className={`fixed inset-0 bg-gray-500 transition-opacity ${
+          className={`fixed inset-0 backdrop-filter backdrop-blur-md transition-opacity flex ${
             graphVisible
-              ? 'bg-opacity-75 ease-out duration-300'
+              ? 'bg-opacity-75 dark:bg-opacity-75 ease-out duration-300'
               : 'bg-opacity-0 ease-in duration-200'
           }`}
           aria-hidden="true"
         >
-          <div className="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200 max-w-screen-lg m-auto">
-            <div className="px-4 py-5 sm:px-6 flex justify-between">
-              <h2>Graph</h2>
+          <div className="bg-white dark:bg-gray-900 overflow-hidden shadow rounded-lg divide-y divide-gray-200 max-w-screen-lg m-auto">
+            <div className="px-4 py-5 sm:px-6 flex justify-between dark:text-gray-200">
+              <h2 className="text-xl font-semibold">Graph</h2>
               <button
                 type="button"
                 className=""
                 onClick={() => setGraphVisible(false)}
               >
-                X
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
               </button>
             </div>
             <div className="">

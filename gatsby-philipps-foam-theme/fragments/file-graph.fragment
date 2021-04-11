@@ -15,6 +15,10 @@ export const useGraphData = () => {
             slug
           }
           childMdx {
+            headings {
+              depth
+              value
+            }
             outboundReferences {
               ... on Mdx {
                 parent {

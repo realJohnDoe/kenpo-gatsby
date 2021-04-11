@@ -44,7 +44,6 @@
 
 @media screen and (max-width: 800px) {
   .note-container {
-    padding: 16px;
     width: 100%;
     overflow-y: auto;
   }
@@ -67,7 +66,6 @@
   .note-content {
     overflow-y: auto;
     height: 100%;
-    padding: 32px;
   }
 
   .note-container-overlay {

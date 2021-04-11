@@ -4,7 +4,7 @@ import {
   StackedPagesProvider,
   useStackedPagesProvider,
 } from 'react-stacked-pages-hook';
-import { dataToNote, dataToSlug } from '../utils/data-to-note';
+import { dataToNote } from '../utils/data-to-note';
 import './custom.css';
 import Header from './header';
 import Note from './note';
@@ -22,16 +22,25 @@ const Content = ({ windowWidth, scrollContainer, stackedPages, index }) => (
         className="note-columns-container"
         style={{ width: 625 * (stackedPages.length + 1) }}
       >
-        {stackedPages.map((page, i) => (
-          <NoteWrapper
-            key={page.slug}
-            i={typeof index !== 'undefined' ? index : i}
-            slug={page.slug}
-            title={page.data.title}
-          >
-            <Note {...page.data} />
-          </NoteWrapper>
-        ))}
+        {stackedPages.map(
+          (page, i) =>
+            console.log('page data', page) || (
+              <NoteWrapper
+                key={page.slug}
+                i={typeof index !== 'undefined' ? index : i}
+                slug={page.slug}
+                title={page.data.title}
+              >
+                <Note
+                  title={page.data.title}
+                  mdx={page.data.mdx}
+                  inboundReferences={page.data.inboundReferences}
+                  outboundReferences={page.data.outboundReferences}
+                  headings={page.data.headings}
+                />
+              </NoteWrapper>
+            )
+        )}
       </div>
     </div>
   </div>
@@ -39,10 +48,12 @@ const Content = ({ windowWidth, scrollContainer, stackedPages, index }) => (
 const MemoContent = memo(Content);
 
 const NotesLayout = ({ location, slug, data }) => {
+  console.log(`NotesLayout data`, data);
+
   const windowWidth = useWindowWidth();
 
   const [state, scrollContainer] = useStackedPagesProvider({
-    firstPage: { slug: dataToSlug(data), data },
+    firstPage: { slug: data?.file?.fields?.slug, data },
     location,
     processPageQuery: dataToNote,
     pageWidth: 625,
