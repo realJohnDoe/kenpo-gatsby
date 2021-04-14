@@ -1,5 +1,6 @@
 import G6 from '@antv/g6';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import useThemeState from '../state/useThemeState';
 import { useGraphData } from '../use-graph-data';
 
@@ -138,7 +139,7 @@ const G6GraphViz = ({ graphVisible, setGraphVisible }) => {
     }
   }, [graph, edges, navigate, nodes, setGraphVisible, theme]);
 
-  return (
+  return createPortal(
     <div
       className={`fixed z-10 inset-0 overflow-y-auto ${
         graphVisible ? '' : 'hidden'
@@ -186,7 +187,8 @@ const G6GraphViz = ({ graphVisible, setGraphVisible }) => {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

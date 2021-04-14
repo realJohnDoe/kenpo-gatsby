@@ -22,25 +22,22 @@ const Content = ({ windowWidth, scrollContainer, stackedPages, index }) => (
         className="note-columns-container"
         style={{ width: 625 * (stackedPages.length + 1) }}
       >
-        {stackedPages.map(
-          (page, i) =>
-            console.log('page data', page) || (
-              <NoteWrapper
-                key={page.slug}
-                i={typeof index !== 'undefined' ? index : i}
-                slug={page.slug}
-                title={page.data.title}
-              >
-                <Note
-                  title={page.data.title}
-                  mdx={page.data.mdx}
-                  inboundReferences={page.data.inboundReferences}
-                  outboundReferences={page.data.outboundReferences}
-                  headings={page.data.headings}
-                />
-              </NoteWrapper>
-            )
-        )}
+        {stackedPages.map((page, i) => (
+          <NoteWrapper
+            key={page.slug}
+            i={typeof index !== 'undefined' ? index : i}
+            slug={page.slug}
+            title={page.data.title}
+          >
+            <Note
+              title={page.data.title}
+              mdx={page.data.mdx}
+              inboundReferences={page.data.inboundReferences}
+              outboundReferences={page.data.outboundReferences}
+              headings={page.data.headings}
+            />
+          </NoteWrapper>
+        ))}
       </div>
     </div>
   </div>
@@ -48,8 +45,6 @@ const Content = ({ windowWidth, scrollContainer, stackedPages, index }) => (
 const MemoContent = memo(Content);
 
 const NotesLayout = ({ location, slug, data }) => {
-  console.log(`NotesLayout data`, data);
-
   const windowWidth = useWindowWidth();
 
   const [state, scrollContainer] = useStackedPagesProvider({

@@ -2,7 +2,6 @@ import { Link } from 'gatsby';
 import React from 'react';
 import useSiteMetadata from '../use-site-metadata';
 import DarkModeToggle from './dark-mode-toggle';
-import GraphButton from './graph-button';
 import GraphButton2 from './graph-button2';
 import './header.css';
 import { Search } from './search';
@@ -17,9 +16,9 @@ const Header = () => {
       </Link>
       <div className="flex space-x-4">
         <Search />
-        <GraphButton />
+        {/* <GraphButton /> */}
         <GraphButton2 />
-        <DarkModeToggle />
+        {typeof window !== 'undefined' ? <DarkModeToggle /> : null}
       </div>
     </header>
   );
