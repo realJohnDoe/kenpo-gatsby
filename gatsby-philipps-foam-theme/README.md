@@ -4,12 +4,23 @@ My customized Gatsby theme specifically for [Foam](https://foambubble.github.io/
 
 Forked from [mathieudutour/gatsby-digital-garden](https://github.com/mathieudutour/gatsby-digital-garden) who did all the major work.
 
+Changes made to original:
+
+- Codeblocks with Codemirror 6
+- Header with Table of Contents
+- Upped deps (Gatsby 3)
+- Adopted Tailwind for styles
+- Dropped roam support (check [mathieudutour/gatsby-digital-garden](https://github.com/mathieudutour/gatsby-digital-garden) if you need it)
+- Changed Graph Chart
+
 ### Manually add to your site
+
+[Example Repository](https://github.com/phartenfeller/gatsby-philipps-foam-theme/tree/master/example)
 
 1. Install the theme
 
    ```shell
-   npm install gatsby-philipps-foam-theme
+   npm install gatsby-philipps-foam-theme autoprefixer gatsby gatsby-plugin-postcss postcss react react-dom
    ```
 
 2. Add the configuration to your `gatsby-config.js` file
