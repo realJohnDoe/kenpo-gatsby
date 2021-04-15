@@ -1,5 +1,6 @@
 import G6 from '@antv/g6';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import React, { Fragment, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import useThemeState from '../state/useThemeState';
 import { useGraphData } from '../use-graph-data';
@@ -27,28 +28,13 @@ const prepareEdges = (edges, darkMode) => {
   return edges;
 };
 
-const G6GraphViz = ({ graphVisible, setGraphVisible }) => {
-  const [nodesData, linksData, navigate, highlight] = useGraphData();
-  const { theme } = useThemeState();
-  const [graph, setGraph] = useState(null);
+const GraphChart = ({ nodes, edges, navigate, setGraphVisible }) => {
   const graphContainerRef = useRef();
-  console.log('hook Data', { nodesData, linksData, navigate, highlight });
-
-  const darkMode = theme === 'dark';
-  console.log({ darkMode });
-
-  const nodes = useMemo(() => prepareNodes(nodesData, darkMode), [
-    nodesData,
-    darkMode,
-  ]);
-  const edges = useMemo(() => prepareEdges(linksData, darkMode), [
-    linksData,
-    darkMode,
-  ]);
-
-  console.log('nodes after fct', nodes);
+  const [graph, setGraph] = useState(null);
 
   useEffect(() => {
+    console.log('ssasa', graphContainerRef);
+    if (!graphContainerRef || !graphContainerRef.current) return;
     console.log('rerender');
     if (!graph) {
       const nGraph = new G6.Graph({
@@ -137,57 +123,104 @@ const G6GraphViz = ({ graphVisible, setGraphVisible }) => {
       graph.data({ nodes, edges });
       graph.render();
     }
-  }, [graph, edges, navigate, nodes, setGraphVisible, theme]);
+  }, [graph, edges, navigate, nodes, setGraphVisible]);
+
+  return <div id="graph-container" ref={graphContainerRef} />;
+};
+
+const G6GraphViz = ({ graphVisible, setGraphVisible }) => {
+  const [nodesData, linksData, navigate, highlight] = useGraphData();
+  const { theme } = useThemeState();
+  const cancelButtonRef = useRef();
+
+  console.log('hook Data', { nodesData, linksData, navigate, highlight });
+
+  const darkMode = theme === 'dark';
+  console.log({ darkMode });
+
+  const nodes = useMemo(() => prepareNodes(nodesData, darkMode), [
+    nodesData,
+    darkMode,
+  ]);
+  const edges = useMemo(() => prepareEdges(linksData, darkMode), [
+    linksData,
+    darkMode,
+  ]);
+
+  console.log('nodes after fct', nodes);
 
   return createPortal(
-    <div
-      className={`fixed z-10 inset-0 overflow-y-auto ${
-        graphVisible ? '' : 'hidden'
-      } `}
-      aria-labelledby="modal-title"
-      role="dialog"
-      aria-modal="true"
-    >
-      <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <div
-          className={`fixed inset-0 backdrop-filter backdrop-blur-md transition-opacity flex ${
-            graphVisible
-              ? 'bg-opacity-75 dark:bg-opacity-75 ease-out duration-300'
-              : 'bg-opacity-0 ease-in duration-200'
-          }`}
-          aria-hidden="true"
-        >
-          <div className="bg-white dark:bg-gray-900 overflow-hidden shadow rounded-lg divide-y divide-gray-200 max-w-screen-lg m-auto">
-            <div className="px-4 py-5 sm:px-6 flex justify-between dark:text-gray-200">
-              <h2 className="text-xl font-semibold">Graph</h2>
-              <button
-                type="button"
-                className=""
-                onClick={() => setGraphVisible(false)}
-              >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
+    <Transition.Root show={graphVisible} as={Fragment}>
+      <Dialog
+        as="div"
+        static
+        open={graphVisible}
+        className="fixed z-10 inset-0 overflow-y-auto"
+        initialFocus={cancelButtonRef}
+        onClose={() => setGraphVisible(false)}
+      >
+        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <Dialog.Overlay className="fixed inset-0 bg-gray-800 bg-opacity-50 transition-opacity backdrop-filter backdrop-blur-lg" />
+          </Transition.Child>
+
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0 scale-95"
+            enterTo="opacity-100 scale-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100 scale-100"
+            leaveTo="opacity-0 scale-95"
+          >
+            <div className="inline-block align-bottom bg-white dark:bg-gray-900 rounded px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6 md:max-w-screen-lg m-auto">
+              <div className="flex justify-between dark:text-gray-200">
+                <Dialog.Title as="h2" className="text-xl font-semibold">
+                  Graph
+                </Dialog.Title>
+                <button
+                  type="button"
+                  className=""
+                  onClick={() => setGraphVisible(false)}
+                  ref={cancelButtonRef}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div className="">
+                <GraphChart
+                  nodes={nodes}
+                  edges={edges}
+                  navigate={navigate}
+                  setGraphVisible={setGraphVisible}
+                />
+              </div>
             </div>
-            <div className="">
-              <div id="graph-container" ref={graphContainerRef} />
-            </div>
-          </div>
+          </Transition.Child>
         </div>
-      </div>
-    </div>,
+      </Dialog>
+    </Transition.Root>,
     document.body
   );
 };

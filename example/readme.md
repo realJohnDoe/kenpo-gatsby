@@ -7,3 +7,4 @@ This is an example with links
 - [[text]]
 - [[images]]
 - [[one]]
+- [[headings]]
