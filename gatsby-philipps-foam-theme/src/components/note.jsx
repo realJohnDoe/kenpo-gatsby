@@ -18,6 +18,8 @@ const depthStyles = (depth) => {
   }
 };
 
+const getHeaderId = (value) => `#${value.replace(/ /g, '-').toLowerCase()}`;
+
 const HeadingButton = ({ headings }) => {
   const filtertedHeadings = headings.filter((h) => h.depth !== 1);
 
@@ -63,10 +65,10 @@ const HeadingButton = ({ headings }) => {
                 <Menu.Item key={h.value}>
                   {({ active }) => (
                     <a
-                      href={`#${h.value}`}
+                      href={getHeaderId(h.value)}
                       className={`${
-                        active ? 'bg-white' : null
-                      } no-underline focus:outline-nine focus:ring focus:ring-blue-500 hover:bg-blue-600 flex`}
+                        active ? 'bg-blue-600' : null
+                      } no-underline focus:outline-nine focus:ring focus:ring-blue-500 flex`}
                     >
                       <div className={`pl-2 w-${indentClass(h.depth)}`} />
                       <div

@@ -8,3 +8,4 @@ This is an example with links
 - [[images]]
 - [[one]]
 - [[headings]]
+- [[webcomponents]]
