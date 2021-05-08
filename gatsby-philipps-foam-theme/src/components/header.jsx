@@ -5,6 +5,7 @@ import DarkModeToggle from './dark-mode-toggle';
 import GraphButton2 from './graph-button2';
 import './header.css';
 import { Search } from './search';
+import SearchButton from './search-button';
 
 const Header = () => {
   const siteMetadata = useSiteMetadata();
@@ -15,8 +16,7 @@ const Header = () => {
         <h1 className="text-xl">{siteMetadata.title}</h1>
       </Link>
       <div className="flex space-x-4">
-        <Search />
-        {/* <GraphButton /> */}
+        <SearchButton />
         <GraphButton2 />
         {typeof window !== 'undefined' ? <DarkModeToggle /> : null}
       </div>

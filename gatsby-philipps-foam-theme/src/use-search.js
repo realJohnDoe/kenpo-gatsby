@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useMemo } from "react";
-import FlexSearch from "flexsearch";
-import { graphql, useStaticQuery } from "gatsby";
+import FlexSearch from 'flexsearch';
+import { graphql, useStaticQuery } from 'gatsby';
+import { useEffect, useMemo, useState } from 'react';
 
 export default (query, searchOptions) => {
   const [store, setStore] = useState(null);
@@ -57,13 +57,7 @@ export default (query, searchOptions) => {
 
   return useMemo(() => {
     if (!query || !store || (!pathIndex && !bodyIndex && !titleIndex))
-      return [
-        {
-          id: "loading",
-          title: "",
-          excerpt: <div class="lds-dual-ring"></div>,
-        },
-      ];
+      return null;
 
     const rawPathResults = pathIndex
       ? pathIndex.search(query, searchOptions)
