@@ -1,16 +1,16 @@
-import React from "react";
+import React from 'react';
 import {
   LinkToStacked,
   PageIndexProvider,
   useStackedPage,
-} from "react-stacked-pages-hook";
+} from 'react-stacked-pages-hook';
 
-import "./note-wrapper.css";
+import './note-wrapper.css';
 
 function noteContainerClassName({ overlay, obstructed, highlighted } = {}) {
-  return `note-container ${overlay ? "note-container-overlay" : ""} ${
-    obstructed ? "note-container-obstructed" : ""
-  } ${highlighted ? "note-container-highlighted" : ""}`;
+  return `note-container ${overlay ? 'note-container-overlay' : ''} ${
+    obstructed ? 'note-container-obstructed' : ''
+  } ${highlighted ? 'note-container-highlighted' : ''}`;
 }
 
 const NoteWrapper = ({ children, slug, title }) => {
@@ -18,7 +18,7 @@ const NoteWrapper = ({ children, slug, title }) => {
 
   return (
     <div
-      className={noteContainerClassName(state)}
+      className={`border-r border-skin-base ${noteContainerClassName(state)}`}
       style={{ left: 40 * (i || 0), right: -585 }}
     >
       <div className="note-content">{children}</div>

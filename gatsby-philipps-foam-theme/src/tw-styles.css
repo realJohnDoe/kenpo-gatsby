@@ -2,8 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  .theme-white {
+    --color-text-base: 0, 0, 0;
+    --color-text-link: 99, 102, 241;
+
+    --color-accent: 129, 140, 248;
+
+    --color-background-base: 255, 255, 255;
+    --color-background-header: 243, 244, 246;
+
+    --color-background-popover: var(--color-background-header);
+    --color-background-popover-hover: 229, 231, 235;
+
+    --color-border-base: var(--color-background-header);
+
+    --color-ring-base: var(--color-accent);
+  }
+
+  .theme-black {
+    --color-text-base: 255, 255, 255;
+    --color-text-link: 96, 165, 250;
+
+    --color-accent: 96, 165, 250;
+
+    --color-background-base: 0, 0, 0;
+    --color-background-header: var(--color-background-base);
+
+    --color-background-popover: 17, 24, 39;
+    --color-background-popover-hover: 31, 41, 55;
+
+    --color-border-base: 48, 48, 48;
+
+    --color-ring-base: var(--color-accent);
+  }
+}
+
+body {
+  @apply bg-skin-base;
+}
+
+.header-button {
+  @apply text-skin-base hover:opacity-60 px-4 rounded focus:outline-none focus:ring focus:ring-skin-base;
+}
+
 .note-content {
-  @apply prose-sm;
+  @apply prose-sm bg-skin-base text-skin-base;
+}
+
+.note-content a {
+  @apply text-skin-link;
 }
 
 /* @layer components {

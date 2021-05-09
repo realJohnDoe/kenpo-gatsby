@@ -31,7 +31,7 @@ const HeadingButton = ({ headings }) => {
     <Menu as="div" className="flex">
       {({ open }) => (
         <>
-          <Menu.Button className="align-middle mr-4 px-3 -ml-3 rounded focus:outline-none focus:ring focus:ring-blue-500">
+          <Menu.Button className="text-skin-base text-opacity-60 align-middle mr-2 px-3 -ml-3 rounded focus:outline-none focus:ring focus:ring-skin-base">
             <svg
               className="w-4 h-4"
               fill="none"
@@ -58,7 +58,7 @@ const HeadingButton = ({ headings }) => {
             leaveTo="transform opacity-0 scale-95"
           >
             <Menu.Items
-              className={`origin-top-left absolute left-0 mt-8 ml-2 bg-white dark:bg-gray-900 shadow-lg
+              className={`origin-top-left absolute left-0 mt-8 ml-2 bg-skin-popover shadow-md
         rounded-md py-1 text-base focus:outline-none sm:text-sm`}
             >
               {filtertedHeadings.map((h) => (
@@ -67,12 +67,12 @@ const HeadingButton = ({ headings }) => {
                     <a
                       href={getHeaderId(h.value)}
                       className={`${
-                        active ? 'bg-blue-600' : null
-                      } no-underline focus:outline-nine focus:ring focus:ring-blue-500 flex`}
+                        active ? 'bg-skin-popover-hover' : null
+                      } no-underline focus:outline-nine focus:ring focus:ring-skin-base focus:ring-inset flex`}
                     >
                       <div className={`pl-2 w-${indentClass(h.depth)}`} />
                       <div
-                        className={`text-gray-900 dark:text-gray-300 select-none py-2 pr-9 ${depthStyles(
+                        className={`text-skin-base select-none py-2 pr-9 ${depthStyles(
                           h.depth
                         )}`}
                       >
@@ -103,13 +103,13 @@ const Note = ({
   );
 
   return (
-    <>
+    <div className="border-r border-skin-base">
       {partOf ? (
         <div>
           Part of <LinkToStacked to={partOf.slug}>{partOf.title}</LinkToStacked>
         </div>
       ) : null}
-      <header className="flex py-2 sticky top-0  px-4 md:px-8">
+      <header className="flex py-2 sticky top-0  px-4 md:px-8 bg-skin-base border-b border-skin-base">
         <HeadingButton headings={headings} />
         <span className="font-semibold">{title}</span>
       </header>
@@ -119,7 +119,7 @@ const Note = ({
         </MDXProvider>
         <ReferencesBlock references={inboundReferences} />
       </main>
-    </>
+    </div>
   );
 };
 

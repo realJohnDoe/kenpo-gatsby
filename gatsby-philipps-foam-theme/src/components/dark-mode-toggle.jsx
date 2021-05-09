@@ -2,21 +2,21 @@ import React, { useState } from 'react';
 import useThemeState from '../state/useThemeState';
 import './dark-mode-toggle.css';
 
-const DARK_MODE = 'dark';
-const LIGHT_MODE = 'light';
+const BLACK_THEME = 'theme-black';
+const WHITE_THEME = 'theme-white';
 
 const DarkModeToggle = () => {
   const [isInitialized, setIsInitialized] = useState(false);
   const { theme, setTheme } = useThemeState();
-  const isDark = theme === DARK_MODE;
+  const isDark = theme === BLACK_THEME;
 
   if (!isInitialized) {
-    setTheme(theme || LIGHT_MODE);
+    setTheme(theme || WHITE_THEME);
     setIsInitialized(true);
   }
 
   const toggleTheme = () => {
-    const newMode = isDark ? LIGHT_MODE : DARK_MODE;
+    const newMode = isDark ? WHITE_THEME : BLACK_THEME;
     setTheme(newMode);
   };
 
@@ -32,6 +32,7 @@ const DarkModeToggle = () => {
         type="checkbox"
         checked={!isDark}
         onChange={toggleTheme}
+        className="header-button"
       />
       <div />
     </label>

@@ -1,6 +1,5 @@
 body {
-  background-color: var(--main-bg);
-  color: var(--text);
+  /* @apply bg-skin-base text-skin-base; */
   margin: 0;
   padding: 0;
   height: 100vh;

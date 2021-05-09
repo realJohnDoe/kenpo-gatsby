@@ -1,5 +1,4 @@
 import React, { lazy, Suspense, useState } from 'react';
-import './graph-button.css';
 
 const SearchPopover = lazy(() => import('./SearchPopover'));
 
@@ -12,7 +11,7 @@ const SearchButton = () => {
         type="button"
         title="Show Graph visualisation"
         aria-label="Show Graph visualisation"
-        className="graph-button"
+        className="header-button"
         onClick={() => setSearchVisible(true)}
       >
         <svg
