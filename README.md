@@ -14,11 +14,19 @@ Changes made to original:
 Planned:
 
 - Change graph diagram (redo with `@antv/g6`)
+- Reworked search
 - More themes and some style changes
 - Small table of contents at frame header (like GitHub has now)
 
-## Development
+## Install
 
+[![NPM](https://nodei.co/npm/gatsby-philipps-foam-theme.png)](https://nodei.co/npm/gatsby-philipps-foam-theme/)
+
+```sh
+npm install gatsby-philipps-foam-theme
+```
+
+## Development
 
 This is a yarn workspace. Just run `yarn` in the root to install.
 
