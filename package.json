@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "start": "yarn workspace example develop",
-    "build": "yarn workspace example build"
+    "build": "yarn workspace example build",
+    "link-package": "cd ./gatsby-philipps-foam-theme && npm link"
   },
   "workspaces": [
     "gatsby-philipps-foam-theme",
