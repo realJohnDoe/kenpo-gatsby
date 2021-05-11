@@ -103,7 +103,7 @@ const Note = ({
   );
 
   return (
-    <div className="border-r border-skin-base">
+    <div className="">
       {partOf ? (
         <div>
           Part of <LinkToStacked to={partOf.slug}>{partOf.title}</LinkToStacked>

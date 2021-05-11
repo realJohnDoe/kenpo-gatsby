@@ -5,12 +5,14 @@
 @layer base {
   .theme-white {
     --color-text-base: 0, 0, 0;
+    --color-text-secondary: 51, 65, 85;
     --color-text-link: 99, 102, 241;
 
     --color-accent: 129, 140, 248;
 
     --color-background-base: 255, 255, 255;
     --color-background-header: 243, 244, 246;
+    --color-background-references: 244, 248, 255;
 
     --color-background-popover: var(--color-background-header);
     --color-background-popover-hover: 229, 231, 235;
@@ -22,12 +24,14 @@
 
   .theme-black {
     --color-text-base: 255, 255, 255;
+    --color-text-secondary: 199, 206, 214;
     --color-text-link: 96, 165, 250;
 
     --color-accent: 96, 165, 250;
 
     --color-background-base: 0, 0, 0;
     --color-background-header: var(--color-background-base);
+    --color-background-references: 16, 18, 23;
 
     --color-background-popover: 17, 24, 39;
     --color-background-popover-hover: 31, 41, 55;
@@ -42,18 +46,27 @@ body {
   @apply bg-skin-base;
 }
 
-.header-button {
-  @apply text-skin-base hover:opacity-60 px-4 rounded focus:outline-none focus:ring focus:ring-skin-base;
-}
+@layer components {
+  .header-button {
+    @apply text-skin-base hover:opacity-60 px-4 rounded focus:outline-none focus:ring focus:ring-skin-base;
+  }
+  
+  .note-content {
+    @apply prose-sm bg-skin-base text-skin-base;
+  }
+  
+  .note-content a {
+    @apply tw-link;
+  }
 
-.note-content {
-  @apply prose-sm bg-skin-base text-skin-base;
-}
+  .tw-link {
+    @apply p-1 rounded text-skin-link underline hover:text-opacity-75 focus:outline-none focus:ring active:ring ring-skin-base; 
+  }
 
-.note-content a {
-  @apply text-skin-link;
+  .tw-popover {
+    @apply p-4 rounded-lg relative text-xs max-w-md max-h-64 overflow-hidden text-skin-base bg-skin-references shadow;
+  }
 }
-
 /* @layer components {
 
 

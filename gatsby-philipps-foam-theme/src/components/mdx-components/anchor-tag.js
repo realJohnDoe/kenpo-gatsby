@@ -3,7 +3,7 @@ import Tippy from '@tippyjs/react';
 import { withPrefix } from 'gatsby';
 import React from 'react';
 import { LinkToStacked } from 'react-stacked-pages-hook';
-import './anchor-tag.css';
+// import './anchor-tag.css';
 import MDXRenderer from './mdx-renderer';
 
 const custBasename = (filePath) => {
@@ -50,7 +50,7 @@ export const AnchorTag = ({
         </MDXProvider>
       );
     popupContent = (
-      <div id={ref.id} className="popover with-markdown">
+      <div id={ref.id} className="tw-popover">
         {ref.title === ref.displayTitle ? (
           <React.Fragment>
             <MDXProvider components={nestedComponents}>

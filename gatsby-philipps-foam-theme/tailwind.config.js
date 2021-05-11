@@ -56,6 +56,7 @@ module.exports = {
       textColor: {
         skin: {
           base: withOpacity('--color-text-base'),
+          secondary: withOpacity('--color-text-secondary'),
           link: withOpacity('--color-text-link'),
         },
       },
@@ -63,6 +64,7 @@ module.exports = {
         skin: {
           base: withOpacity('--color-background-base'),
           header: withOpacity('--color-background-header'),
+          references: withOpacity('--color-background-references'),
           popover: withOpacity('--color-background-popover'),
           'popover-hover': withOpacity('--color-background-popover-hover'),
         },
