@@ -16,6 +16,7 @@
 
     --color-background-popover: var(--color-background-header);
     --color-background-popover-hover: 229, 231, 235;
+    --color-background-popover-overlay: rgba(74, 74, 74, 0.5);
 
     --color-border-base: var(--color-background-header);
 
@@ -43,6 +44,7 @@
 
     --color-background-popover: 17, 24, 39;
     --color-background-popover-hover: 31, 41, 55;
+    --color-background-popover-overlay: rgba(60, 60, 60, 0.5);
 
     --color-border-base: 48, 48, 48;
 

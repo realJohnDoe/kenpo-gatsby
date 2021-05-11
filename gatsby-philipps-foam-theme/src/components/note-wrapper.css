@@ -1,26 +1,12 @@
-.note-container {
-  background: var(--note-bg);
-  transition: background 0.3s ease;
-}
 
-.note-container:first-child {
-  border-left: none;
-}
-
-.note-container .note-content,
-.note-container .obstructed-label {
-  transition: opacity 75ms linear;
-}
 
 .note-container .obstructed-label {
   display: block;
-  color: var(--text);
   text-decoration: none;
   font-size: 17px;
   line-height: 40px;
   font-weight: 500;
   writing-mode: vertical-lr;
-  margin-top: 36px;
   top: 0px;
   bottom: 0px;
   left: 0px;

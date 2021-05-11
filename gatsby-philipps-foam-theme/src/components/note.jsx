@@ -109,7 +109,7 @@ const Note = ({
           Part of <LinkToStacked to={partOf.slug}>{partOf.title}</LinkToStacked>
         </div>
       ) : null}
-      <header className="flex py-2 sticky top-0  px-4 md:px-8 bg-skin-base border-b border-skin-base">
+      <header className="flex py-2 sticky top-0 px-4 md:px-8 bg-skin-base border-b border-skin-base z-40">
         <HeadingButton headings={headings} />
         <span className="font-semibold">{title}</span>
       </header>

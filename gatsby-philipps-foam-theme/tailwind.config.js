@@ -69,8 +69,9 @@ module.exports = {
           header: withOpacity('--color-background-header'),
           popover: withOpacity('--color-background-popover'),
           'popover-hover': withOpacity('--color-background-popover-hover'),
+          'popover-overlay': 'var(--color-background-popover-overlay)',
           thead: withOpacity('--color-background-table-head'),
-          'table-odd': withOpacity('--color-background-table-odd') 
+          'table-odd': withOpacity('--color-background-table-odd')
         },
       },
       borderColor: {

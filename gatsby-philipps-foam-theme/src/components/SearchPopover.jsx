@@ -12,13 +12,13 @@ const SearchResult = ({ result }) => {
       <button
         type="button"
         onClick={() => navigate(path)}
-        className="w-full py-2 rounded-lg text-left no-underline hover:bg-gray-100 dark:hover:bg-gray-700 ring-inset focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        className="w-full py-2 rounded-lg text-left no-underline hover:bg-skin-popover-hover ring-inset focus:outline-none focus:ring-2 focus:ring-skin-base"
       >
         <div className="px-4">
-          <h4 className="text-gray-700 dark:text-gray-200 text-lg font-semibold">
+          <h4 className="text-skin-base text-lg font-semibold">
             {title}
           </h4>
-          <span className="text-gray-600 dark:text-gray-400">{excerpt}</span>
+          <span className="text-skin-secondary">{excerpt}</span>
         </div>
       </button>
     </li>
@@ -52,7 +52,7 @@ const SearchPopover = ({ searchVisible, setSearchVisible }) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0 backdrop-filter backdrop-blur-xl transition-opacity" />
+            <Dialog.Overlay className="fixed inset-0 backdrop-filter backdrop-blur transition-opacity bg-skin-popover-overlay" />
           </Transition.Child>
           <Transition.Child
             as={Fragment}
@@ -63,9 +63,9 @@ const SearchPopover = ({ searchVisible, setSearchVisible }) => {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className="p-2 inline-block align-bottom bg-white dark:bg-gray-800 opacity-95 backdrop-filter backdrop-blur-lg rounded-xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full md:max-w-screen-lg m-auto">
+            <div className="p-2 inline-block align-bottom bg-skin-popover opacity-95 backdrop-filter backdrop-blur-lg rounded-xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full md:max-w-screen-lg m-auto">
               <input
-                className="bg-blueGray-100 dark:bg-gray-900 rounded w-full py-4 px-3 text-xl focus:outline-none"
+                className="bg-skin-popover-hover text-skin-base rounded w-full py-4 px-3 text-xl focus:outline-none"
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
