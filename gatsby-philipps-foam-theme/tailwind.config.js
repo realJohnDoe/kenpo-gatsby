@@ -58,15 +58,19 @@ module.exports = {
           base: withOpacity('--color-text-base'),
           secondary: withOpacity('--color-text-secondary'),
           link: withOpacity('--color-text-link'),
+          thead: withOpacity('--color-text-table-head'),
+          tbody: withOpacity('--color-text-table-body')
         },
       },
       backgroundColor: {
         skin: {
           base: withOpacity('--color-background-base'),
+          secondary: withOpacity('--color-background-secondary'),
           header: withOpacity('--color-background-header'),
-          references: withOpacity('--color-background-references'),
           popover: withOpacity('--color-background-popover'),
           'popover-hover': withOpacity('--color-background-popover-hover'),
+          thead: withOpacity('--color-background-table-head'),
+          'table-odd': withOpacity('--color-background-table-odd') 
         },
       },
       borderColor: {

@@ -7,7 +7,7 @@ const ReferencesBlock = ({ references }) => {
   }
 
   return (
-    <div className="references-block bg-skin-references mt-16 rounded-xl p-6 ">
+    <div className="references-block bg-skin-secondary mt-16 rounded-xl p-6 ">
       <h3 className="!mt-0 text-skin-secondary">
         Referred in
       </h3>
