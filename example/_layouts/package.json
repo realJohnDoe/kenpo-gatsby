@@ -20,6 +20,7 @@
   "scripts": {
     "develop": "NODE_ENV=development gatsby develop",
     "build": "gatsby build",
+    "build-gh-pages": "gatsby build --prefix-paths",
     "start": "gatsby serve"
   }
 }

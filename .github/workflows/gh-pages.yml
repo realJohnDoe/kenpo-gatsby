@@ -23,7 +23,7 @@ jobs:
         run: yarn install
 
       - name: Build 🔧
-        run: yarn workspace example build
+        run: yarn workspace example build-gh-pages
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.2
