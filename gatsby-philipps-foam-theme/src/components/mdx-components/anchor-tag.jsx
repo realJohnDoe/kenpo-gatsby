@@ -1,5 +1,6 @@
 import { MDXProvider } from '@mdx-js/react';
 import Tippy from '@tippyjs/react';
+import 'tippy.js/animations/shift-away.css';
 import { withPrefix } from 'gatsby';
 import React from 'react';
 import { LinkToStacked } from 'react-stacked-pages-hook';
@@ -69,7 +70,6 @@ export const AnchorTag = ({
             </ul>
           </React.Fragment>
         )}
-        <div className="more-content-blind" />
       </div>
     );
     child = (
@@ -103,7 +103,7 @@ export const AnchorTag = ({
   }
 
   return (
-    <Tippy animation="shift-away" content={popupContent} maxWidth="none">
+    <Tippy animation="shift-away" content={popupContent} maxWidth="none" arrow={true}>
       {child}
     </Tippy>
   );
