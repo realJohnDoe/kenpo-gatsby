@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-  .theme-white {
+  body.theme-white {
     --color-text-base: 0, 0, 0;
     --color-text-secondary: 51, 65, 85;
     --color-text-link: 99, 102, 241;
@@ -18,20 +18,25 @@
     --color-background-popover-hover: 229, 231, 235;
     --color-background-popover-overlay: rgba(74, 74, 74, 0.5);
 
-    --color-border-base: var(--color-background-header);
+    --color-border-base: 203, 213, 225;
 
     --color-ring-base: var(--color-accent);
 
-    --color-scrollbar-thumb: #E2E8F0;
-    --color-scrollbar-thumb-hover: #CBD5E1;
+    --color-scrollbar-thumb: #e2e8f0;
+    --color-scrollbar-thumb-hover: #cbd5e1;
 
     --color-background-table-head: 213, 223, 239;
     --color-background-table-odd: 240, 245, 255;
     --color-text-table-head: 53, 72, 105;
     --color-text-table-body: 113, 113, 122;
+
+    --color-graph-text: #1e293b;
+    --color-graph-node: #38bdf8;
+    --color-graph-node-hover: #7dd3fc;
+    --color-graph-edge: #94a3b8;
   }
 
-  .theme-black {
+  body.theme-black {
     --color-text-base: 255, 255, 255;
     --color-text-secondary: 199, 206, 214;
     --color-text-link: 96, 165, 250;
@@ -50,13 +55,18 @@
 
     --color-ring-base: var(--color-accent);
 
-    --color-scrollbar-thumb: #1E293B;
+    --color-scrollbar-thumb: #1e293b;
     --color-scrollbar-thumb-hover: #334155;
 
     --color-background-table-head: 28, 33, 45;
     --color-background-table-odd: 14, 17, 23;
     --color-text-table-head: 206, 216, 239;
     --color-text-table-body: var(--color-text-secondary);
+
+    --color-graph-text: #e2e8f0;
+    --color-graph-node: #4f46e5;
+    --color-graph-node-hover: #6366f1;
+    --color-graph-edge: #64748b;
   }
 }
 
@@ -68,11 +78,11 @@ body {
   .header-button {
     @apply text-skin-base hover:opacity-60 px-4 rounded focus:outline-none focus:ring focus:ring-skin-base;
   }
-  
+
   .note-content {
     @apply prose-sm bg-skin-base text-skin-base;
   }
-  
+
   .note-content a {
     @apply tw-link;
   }
@@ -83,7 +93,7 @@ body {
   }
 
   .tw-link {
-    @apply p-1 rounded text-skin-link underline hover:text-opacity-75 focus:outline-none focus:ring active:ring ring-skin-base; 
+    @apply p-1 rounded text-skin-link underline hover:text-opacity-75 focus:outline-none focus:ring active:ring ring-skin-base;
   }
 
   .min-w-80px {
@@ -117,15 +127,15 @@ body {
     width: 12px;
     height: 16px;
   }
-  
+
   ::-webkit-scrollbar-track {
     background-color: var(--color-background-base);
   }
-  
+
   ::-webkit-scrollbar-thumb {
     background-color: var(--color-scrollbar-thumb);
   }
-  
+
   ::-webkit-scrollbar-thumb:hover {
     background-color: var(--color-scrollbar-thumb-hover);
   }
@@ -162,7 +172,6 @@ body {
 .CodeMirror-vscrollbar {
   overflow: hidden !important;
 }
-
 
 .cm-editor,
 .cm-scroller {

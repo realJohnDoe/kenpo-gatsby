@@ -2,7 +2,7 @@ import Downshift from 'downshift';
 import { navigate } from 'gatsby';
 import React, { useCallback, useState } from 'react';
 import useSearch from '../use-search';
-import './search.css';
+// import './search.css';
 
 export function Search() {
   const [query, setQuery] = useState('');

@@ -18,11 +18,16 @@ const NoteWrapper = ({ children, slug, title }) => {
 
   return (
     <div
-      className={`border-l border-r border-skin-base ${noteContainerClassName(state)}`}
+      className={`border-l border-r border-skin-base ${noteContainerClassName(
+        state
+      )}`}
       style={{ left: 40 * (i || 0), right: -585 }}
     >
       <div className="note-content">{children}</div>
-      <LinkToStacked to={slug} className="obstructed-label pt-6 text-skin-base border-r border-skin-base">
+      <LinkToStacked
+        to={slug}
+        className="obstructed-label pt-6 text-skin-base border-r border-skin-base"
+      >
         {title}
       </LinkToStacked>
     </div>

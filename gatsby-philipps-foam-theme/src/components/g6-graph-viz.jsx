@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import G6 from '@antv/g6';
 import { Dialog, Transition } from '@headlessui/react';
 import React, { Fragment, useEffect, useMemo, useRef, useState } from 'react';
@@ -5,37 +6,48 @@ import { createPortal } from 'react-dom';
 import useThemeState from '../state/useThemeState';
 import { useGraphData } from '../use-graph-data';
 
-const prepareNodes = (nodes, darkMode) => {
+const body = document.querySelector('body');
+
+const getCssVar = (variable) =>
+  getComputedStyle(body).getPropertyValue(`--${variable}`);
+
+const getStyles = (theme) => ({
+  theme,
+  labelText: getCssVar('color-graph-text'),
+  nodeColor: getCssVar('color-graph-node'),
+  nodeColorHover: getCssVar('color-graph-node-hover'),
+  edgeColor: getCssVar('color-graph-edge'),
+});
+
+const prepareNodes = (nodes, styles) => {
   nodes.map((n) => {
-    // eslint-disable-next-line no-param-reassign
     if (!n.syle) n.style = {};
     if (!n.labelCfg) n.labelCfg = {};
     if (!n.labelCfg.style) n.labelCfg.style = {};
-    n.labelCfg.style.fill = darkMode ? '#b4bec2' : '#292929';
-    n.style.fill = darkMode ? '#35354d' : '#DEE9FF';
+    n.labelCfg.style.fill = styles.labelText;
+    n.style.fill = styles.nodeColor;
     return n;
   });
   return nodes;
 };
 
-const prepareEdges = (edges, darkMode) => {
+const prepareEdges = (edges, styles) => {
   edges.map((e) => {
     e.id = `${e.source}-${e.target}`;
     if (!e.style) e.style = {};
-    e.style.color = darkMode ? '#737a7d' : '#e2e2e2';
+    e.style.color = styles.edgeColor;
     return e;
   });
   return edges;
 };
 
-const GraphChart = ({ nodes, edges, navigate, setGraphVisible }) => {
+const GraphChart = ({ nodes, edges, navigate, setGraphVisible, styles }) => {
   const graphContainerRef = useRef();
   const [graph, setGraph] = useState(null);
 
   useEffect(() => {
-    console.log('ssasa', graphContainerRef);
     if (!graphContainerRef || !graphContainerRef.current) return;
-    console.log('rerender');
+
     if (!graph) {
       const nGraph = new G6.Graph({
         container: graphContainerRef.current,
@@ -74,15 +86,15 @@ const GraphChart = ({ nodes, edges, navigate, setGraphVisible }) => {
         nodeStateStyles: {
           // The node style when the state 'hover' is true
           hover: {
-            fill: '#c9dbff',
+            fill: styles.nodeColorHover,
           },
         },
         defaultEdge: {
-          color: '#e2e2e2',
+          color: styles.edgeColor,
           style: {
             endArrow: {
               path: G6.Arrow.vee(7, 10, 5),
-              fill: '#e2e2e2',
+              fill: styles.edgeColor,
             },
           },
         },
@@ -113,13 +125,9 @@ const GraphChart = ({ nodes, edges, navigate, setGraphVisible }) => {
         setGraphVisible(false);
       });
 
-      console.log('data', { nodes, edges });
-
       nGraph.data({ nodes, edges });
       nGraph.render();
     } else {
-      console.log('data', { nodes, edges });
-
       graph.data({ nodes, edges });
       graph.render();
     }
@@ -133,21 +141,16 @@ const G6GraphViz = ({ graphVisible, setGraphVisible }) => {
   const { theme } = useThemeState();
   const cancelButtonRef = useRef();
 
-  console.log('hook Data', { nodesData, linksData, navigate, highlight });
+  const styles = useMemo(() => getStyles(theme), [theme]);
 
-  const darkMode = theme === 'dark';
-  console.log({ darkMode });
-
-  const nodes = useMemo(() => prepareNodes(nodesData, darkMode), [
-    nodesData,
-    darkMode,
-  ]);
-  const edges = useMemo(() => prepareEdges(linksData, darkMode), [
-    linksData,
-    darkMode,
-  ]);
-
-  console.log('nodes after fct', nodes);
+  const nodes = useMemo(
+    () => prepareNodes(nodesData, styles),
+    [nodesData, styles]
+  );
+  const edges = useMemo(
+    () => prepareEdges(linksData, styles),
+    [linksData, styles]
+  );
 
   return createPortal(
     <Transition.Root show={graphVisible} as={Fragment}>
@@ -181,14 +184,14 @@ const G6GraphViz = ({ graphVisible, setGraphVisible }) => {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className="inline-block align-bottom bg-white dark:bg-gray-900 rounded px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6 md:max-w-screen-lg m-auto">
-              <div className="flex justify-between dark:text-gray-200">
+            <div className="inline-block align-bottom bg-skin-popover rounded px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6 md:max-w-screen-lg m-auto">
+              <div className="flex justify-between text-skin-base">
                 <Dialog.Title as="h2" className="text-xl font-semibold">
                   Graph
                 </Dialog.Title>
                 <button
                   type="button"
-                  className=""
+                  className="p-2 rounded focus:outline-none focus:ring focus:ring-skin-base"
                   onClick={() => setGraphVisible(false)}
                   ref={cancelButtonRef}
                 >
@@ -214,6 +217,7 @@ const G6GraphViz = ({ graphVisible, setGraphVisible }) => {
                   edges={edges}
                   navigate={navigate}
                   setGraphVisible={setGraphVisible}
+                  styles={styles}
                 />
               </div>
             </div>

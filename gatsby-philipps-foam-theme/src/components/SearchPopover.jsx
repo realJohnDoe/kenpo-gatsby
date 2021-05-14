@@ -8,16 +8,14 @@ const SearchResult = ({ result }) => {
   const { path, title, excerpt } = result;
 
   return (
-    <li key={path}>
+    <li>
       <button
         type="button"
         onClick={() => navigate(path)}
         className="w-full py-2 rounded-lg text-left no-underline hover:bg-skin-popover-hover ring-inset focus:outline-none focus:ring-2 focus:ring-skin-base"
       >
         <div className="px-4">
-          <h4 className="text-skin-base text-lg font-semibold">
-            {title}
-          </h4>
+          <h4 className="text-skin-base text-lg font-semibold">{title}</h4>
           <span className="text-skin-secondary">{excerpt}</span>
         </div>
       </button>
@@ -75,7 +73,7 @@ const SearchPopover = ({ searchVisible, setSearchVisible }) => {
                 <div className="my-3">
                   <ul>
                     {results.map((r) => (
-                      <SearchResult result={r} />
+                      <SearchResult result={r} key={r.path} />
                     ))}
                   </ul>
                 </div>
