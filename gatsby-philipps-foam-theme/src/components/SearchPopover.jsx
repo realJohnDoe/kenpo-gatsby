@@ -2,6 +2,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { navigate } from 'gatsby';
 import React, { Fragment, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import useSearchPopover from '../state/useSearchPopover';
 import useSearch from '../use-search';
 
 const SearchResult = ({ result }) => {
@@ -23,7 +24,8 @@ const SearchResult = ({ result }) => {
   );
 };
 
-const SearchPopover = ({ searchVisible, setSearchVisible }) => {
+const SearchPopover = () => {
+  const { isOpen, close } = useSearchPopover();
   const [query, setQuery] = useState('');
   const inputRef = useRef();
 
@@ -31,14 +33,14 @@ const SearchPopover = ({ searchVisible, setSearchVisible }) => {
   console.log('results', results);
 
   return createPortal(
-    <Transition.Root show={searchVisible} as={Fragment}>
+    <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
         as="div"
         static
-        open={searchVisible}
+        open={isOpen}
         className="fixed z-10 inset-0 overflow-y-auto"
         initialFocus={inputRef}
-        onClose={() => setSearchVisible(false)}
+        onClose={() => close()}
       >
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
@@ -69,7 +71,7 @@ const SearchPopover = ({ searchVisible, setSearchVisible }) => {
                 onChange={(e) => setQuery(e.target.value)}
                 ref={inputRef}
               />
-              {results && (
+              {results && results.length > 0 && (
                 <div className="my-3">
                   <ul>
                     {results.map((r) => (

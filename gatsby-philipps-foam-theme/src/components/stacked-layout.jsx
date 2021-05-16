@@ -4,6 +4,7 @@ import {
   StackedPagesProvider,
   useStackedPagesProvider,
 } from 'react-stacked-pages-hook';
+import useKeyboardListeners from '../hooks/useKeyboardListeners';
 import { dataToNote } from '../utils/data-to-note';
 import './custom.css';
 import Header from './header';
@@ -13,35 +14,39 @@ import SEO from './seo';
 import './stacked-layout.css';
 import './theme.css';
 
-const Content = ({ windowWidth, scrollContainer, stackedPages, index }) => (
-  <div className="layout">
-    <SEO title={stackedPages[stackedPages.length - 1].data.title} />
-    <Header />
-    <div className="note-columns-scrolling-container" ref={scrollContainer}>
-      <div
-        className="note-columns-container"
-        style={{ width: 625 * (stackedPages.length + 1) }}
-      >
-        {stackedPages.map((page, i) => (
-          <NoteWrapper
-            key={page.slug}
-            i={typeof index !== 'undefined' ? index : i}
-            slug={page.slug}
-            title={page.data.title}
-          >
-            <Note
+const Content = ({ windowWidth, scrollContainer, stackedPages, index }) => {
+  useKeyboardListeners();
+
+  return (
+    <div className="layout">
+      <SEO title={stackedPages[stackedPages.length - 1].data.title} />
+      <Header />
+      <div className="note-columns-scrolling-container" ref={scrollContainer}>
+        <div
+          className="note-columns-container"
+          style={{ width: 625 * (stackedPages.length + 1) }}
+        >
+          {stackedPages.map((page, i) => (
+            <NoteWrapper
+              key={page.slug}
+              i={typeof index !== 'undefined' ? index : i}
+              slug={page.slug}
               title={page.data.title}
-              mdx={page.data.mdx}
-              inboundReferences={page.data.inboundReferences}
-              outboundReferences={page.data.outboundReferences}
-              headings={page.data.headings}
-            />
-          </NoteWrapper>
-        ))}
+            >
+              <Note
+                title={page.data.title}
+                mdx={page.data.mdx}
+                inboundReferences={page.data.inboundReferences}
+                outboundReferences={page.data.outboundReferences}
+                headings={page.data.headings}
+              />
+            </NoteWrapper>
+          ))}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 const MemoContent = memo(Content);
 
 const NotesLayout = ({ location, slug, data }) => {

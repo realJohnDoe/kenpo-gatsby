@@ -76,7 +76,7 @@ body {
 
 @layer components {
   .header-button {
-    @apply text-skin-base hover:opacity-60 px-4 rounded focus:outline-none focus:ring focus:ring-skin-base;
+    @apply text-skin-base hover:opacity-60 py-2 px-4 rounded focus:outline-none focus:ring focus:ring-skin-base;
   }
 
   .note-content {

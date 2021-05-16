@@ -1,9 +1,10 @@
-import React, { lazy, Suspense, useState } from 'react';
+import React, { lazy, Suspense } from 'react';
+import useSearchPopover from '../state/useSearchPopover';
 
 const SearchPopover = lazy(() => import('./SearchPopover'));
 
 const SearchButton = () => {
-  const [searchVisible, setSearchVisible] = useState(false);
+  const { open } = useSearchPopover();
 
   return (
     <>
@@ -12,7 +13,7 @@ const SearchButton = () => {
         title="Show Graph visualisation"
         aria-label="Show Graph visualisation"
         className="header-button"
-        onClick={() => setSearchVisible(true)}
+        onClick={() => open()}
       >
         <svg
           className="w-6 h-6"
@@ -31,10 +32,7 @@ const SearchButton = () => {
       </button>
       {typeof window !== 'undefined' ? (
         <Suspense fallback={null}>
-          <SearchPopover
-            searchVisible={searchVisible}
-            setSearchVisible={setSearchVisible}
-          />
+          <SearchPopover />
         </Suspense>
       ) : null}
     </>
