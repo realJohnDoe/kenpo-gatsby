@@ -2,6 +2,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { navigate } from 'gatsby';
 import React, { Fragment, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import useDebounce from '../hooks/useDebounce';
 import useSearchPopover from '../state/useSearchPopover';
 import useSearch from '../use-search';
 
@@ -29,8 +30,8 @@ const SearchPopover = () => {
   const [query, setQuery] = useState('');
   const inputRef = useRef();
 
-  const results = useSearch(query);
-  console.log('results', results);
+  const debouncedQuery = useDebounce(query, 250);
+  const results = useSearch(debouncedQuery);
 
   return createPortal(
     <Transition.Root show={isOpen} as={Fragment}>
