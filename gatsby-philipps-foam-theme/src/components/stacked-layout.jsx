@@ -1,10 +1,11 @@
 import { useWindowWidth } from '@react-hook/window-size';
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import {
   StackedPagesProvider,
   useStackedPagesProvider,
 } from 'react-stacked-pages-hook';
 import useKeyboardListeners from '../hooks/useKeyboardListeners';
+import useThemeState from '../state/useThemeState';
 import { dataToNote } from '../utils/data-to-note';
 import './custom.css';
 import Header from './header';
@@ -14,8 +15,18 @@ import SEO from './seo';
 import './stacked-layout.css';
 import './theme.css';
 
+let themeInitialized = false;
+
 const Content = ({ windowWidth, scrollContainer, stackedPages, index }) => {
   useKeyboardListeners();
+  const { theme, setTheme } = useThemeState();
+
+  useEffect(() => {
+    if (!themeInitialized) {
+      setTheme(theme);
+      themeInitialized = true;
+    }
+  });
 
   return (
     <div className="layout">
