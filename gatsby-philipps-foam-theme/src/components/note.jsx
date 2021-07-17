@@ -12,9 +12,9 @@ const depthStyles = (depth) => {
     case 2:
       return 'font-bold';
     case 3:
-      return 'font-semibold';
+      return 'font-medium text-opacity-80';
     default:
-      return 'font-light';
+      return 'font-extralight text-opacity-70';
   }
 };
 
@@ -59,7 +59,8 @@ const HeadingButton = ({ headings }) => {
           >
             <Menu.Items
               className={`origin-top-left absolute left-0 mt-8 ml-2 bg-skin-popover shadow-md
-        rounded-md py-1 text-base focus:outline-none sm:text-sm`}
+        rounded-md py-1 text-base focus:outline-none sm:text-sm overflow-hidden overflow-y-scroll`}
+              style={{ maxHeight: '50vh' }}
             >
               {filtertedHeadings.map((h) => (
                 <Menu.Item key={h.value}>
@@ -68,7 +69,8 @@ const HeadingButton = ({ headings }) => {
                       href={getHeaderId(h.value)}
                       className={`${
                         active ? 'bg-skin-popover-hover' : null
-                      } no-underline focus:outline-nine focus:ring focus:ring-skin-base focus:ring-inset flex`}
+                      } focus:outline-nine focus:ring focus:ring-skin-base focus:ring-inset flex`}
+                      style={{ textDecoration: 'none' }}
                     >
                       <div className={`pl-2 w-${indentClass(h.depth)}`} />
                       <div
