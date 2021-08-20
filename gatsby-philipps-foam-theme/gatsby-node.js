@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const fs = require(`fs`);
 const path = require(`path`);
 const { urlResolve } = require(`gatsby-core-utils`);
@@ -182,15 +183,9 @@ exports.createPages = async ({ graphql, actions }, options) => {
       await fs.promises.unlink(
         path.join(__dirname, './src/templates/local-file.js')
       );
-    } catch (err) {}
+    } catch (err) {
+      console.error('Cannot unlink ./src/templates/local-file.js', err);
+      throw err;
+    }
   }
-
-  try {
-    await fs.promises.unlink(
-      path.join(__dirname, './src/templates/roam-block.js')
-    );
-    await fs.promises.unlink(
-      path.join(__dirname, './src/templates/roam-page.js')
-    );
-  } catch (err) {}
 };
