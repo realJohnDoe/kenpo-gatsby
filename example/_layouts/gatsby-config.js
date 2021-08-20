@@ -22,6 +22,7 @@ module.exports = {
           "**/.git/**",
           "**/.github/**",
           "**/.vscode/**",
+          "**/private/**",
         ],
       },
     },
