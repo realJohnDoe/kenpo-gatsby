@@ -56,6 +56,24 @@ Take a look into the [_layouts folder in the example directory](https://github.c
      ],
    };
    ```
+   
+   You can ignore certain folders by adding an "ignore" array to the options:
+   
+   ```js
+   plugins: [
+    {
+      resolve: `gatsby-philipps-foam-theme`,
+      options: {
+        rootNote: "/readme",
+        contentPath: "/",
+        ignore: [
+          "**/_layouts/**",
+          "**/private/**",
+        ],
+      },
+    },
+   ],
+   ```
 
 3. Add notes to your site by creating `md` or `mdx` files inside `/content/garden`.
 
