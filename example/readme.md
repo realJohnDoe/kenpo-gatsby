@@ -1,4 +1,4 @@
-# Digital Garden Using Roam Research
+# Digital Garden Using Foam
 
 This is an example with links
 

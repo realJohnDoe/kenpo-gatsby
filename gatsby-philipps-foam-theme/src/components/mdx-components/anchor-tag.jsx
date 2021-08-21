@@ -1,7 +1,7 @@
 import { MDXProvider } from '@mdx-js/react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/animations/shift-away.css';
-import { withPrefix } from 'gatsby';
+import { graphql, useStaticQuery, withPrefix } from 'gatsby';
 import React from 'react';
 import { LinkToStacked } from 'react-stacked-pages-hook';
 // import './anchor-tag.css';
@@ -12,6 +12,18 @@ const custBasename = (filePath) => {
   return split[split.length - 1];
 };
 
+function isLinkToExcludedPage({ href, withoutLink, title, content }) {
+  const hrefPathaArray = href.split('/');
+  const last = hrefPathaArray[hrefPathaArray.length - 1];
+
+  // strange but with that we can be sure that it points to an excluded page
+  if (withoutLink === undefined && title && last === content) {
+    return true;
+  }
+
+  return false;
+}
+
 export const AnchorTag = ({
   title,
   href,
@@ -20,6 +32,8 @@ export const AnchorTag = ({
   withoutPopup,
   ...restProps
 }) => {
+  console.log('references', references);
+
   // same as in gatsby-transformer-markdown-references/src/compute-inbounds.ts#getRef
   const ref = references.find(
     (x) =>
@@ -78,7 +92,36 @@ export const AnchorTag = ({
       </LinkToStacked>
     );
   } else {
+    console.log('no ref => ', {
+      href,
+      title,
+      withoutLink,
+      withoutPopup,
+      children: restProps.children,
+    });
+    console.log('restprops =>', restProps);
+
     content = restProps.children;
+
+    const hrefPathaArray = href.split('/');
+    const last = hrefPathaArray[hrefPathaArray.length - 1];
+
+    if (isLinkToExcludedPage({ href, withoutLink, title, content })) {
+      return (
+        <span className="px-1 rounded bg-skin-secondary text-skin-secondary cursor-not-allowed tracking-wide">
+          excluded page
+        </span>
+      );
+    }
+
+    if (withoutLink) {
+      return <span>{content}</span>;
+    }
+
+    if (withoutPopup) {
+      return child;
+    }
+
     popupContent = <div className="tw-popover">{href}</div>;
     // eslint-disable-next-line jsx-a11y/anchor-has-content
     child = (
@@ -94,16 +137,13 @@ export const AnchorTag = ({
     );
   }
 
-  if (withoutLink) {
-    return <span>{content}</span>;
-  }
-
-  if (withoutPopup) {
-    return child;
-  }
-
   return (
-    <Tippy animation="shift-away" content={popupContent} maxWidth="none" arrow={true}>
+    <Tippy
+      animation="shift-away"
+      content={popupContent}
+      maxWidth="none"
+      arrow={true}
+    >
       {child}
     </Tippy>
   );
