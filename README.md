@@ -68,7 +68,7 @@ Take a look into the [_layouts folder in the example directory](https://github.c
         contentPath: "/",
         ignore: [
           "**/_layouts/**",
-          "**/private/**",
+          "**/private/**/*",
         ],
       },
     },
