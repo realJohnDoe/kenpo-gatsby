@@ -32,8 +32,6 @@ export const AnchorTag = ({
   withoutPopup,
   ...restProps
 }) => {
-  console.log('references', references);
-
   // same as in gatsby-transformer-markdown-references/src/compute-inbounds.ts#getRef
   const ref = references.find(
     (x) =>
@@ -92,15 +90,6 @@ export const AnchorTag = ({
       </LinkToStacked>
     );
   } else {
-    console.log('no ref => ', {
-      href,
-      title,
-      withoutLink,
-      withoutPopup,
-      children: restProps.children,
-    });
-    console.log('restprops =>', restProps);
-
     content = restProps.children;
 
     const hrefPathaArray = href.split('/');
