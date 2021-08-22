@@ -1,6 +1,9 @@
 import { graphql, useStaticQuery } from 'gatsby';
 import React, { memo } from 'react';
 import { Disclosure } from '@headlessui/react';
+import { ChevronRightIcon, DocumentTextIcon } from '@heroicons/react/outline';
+import { LinkToStacked } from 'react-stacked-pages-hook';
+import classNames from '../utils/classNames';
 
 // the plugin gets a root folder for all contents
 // e.g. when it ist path/to/notes all files have the prefix /notes
@@ -68,13 +71,37 @@ function getPathStructure(pages) {
   return structure;
 }
 
+const FolderDisplay = ({ title, open }) => (
+  <div className="w-full flex items-center">
+    <ChevronRightIcon
+      className={classNames(
+        'w-4 h-4 mx-2 text-skin-icon',
+        open ? 'rotate-90' : null
+      )}
+    />
+    {title}
+  </div>
+);
+
+const FileDisplay = ({ file }) => (
+  <LinkToStacked
+    to={file.linkPath}
+    className="block m-1 py-2 rounded hover:bg-skin-popover-hover focus:outline-none focus:ring-1 focus:ring-skin-base"
+  >
+    <div className="flex items-center ">
+      <DocumentTextIcon className="w-4 h-4 mx-2 text-skin-icon" />
+      {file.displayName}
+    </div>
+  </LinkToStacked>
+);
+
 const PageEntriesDisplay = ({ object, title = null }) => {
   const contents = (
     <>
       {Object.keys(object).map((key) => (
         <>
           {'type' in object[key] ? (
-            <div>File: {object[key].displayName}</div>
+            <FileDisplay file={object[key]} />
           ) : (
             <PageEntriesDisplay object={object[key]} title={key} />
           )}
@@ -88,8 +115,14 @@ const PageEntriesDisplay = ({ object, title = null }) => {
   }
   return (
     <Disclosure>
-      <Disclosure.Button className="py-2">{title}</Disclosure.Button>
-      <Disclosure.Panel className="text-gray-500">{contents}</Disclosure.Panel>
+      {({ open }) => (
+        <div className="m-1">
+          <Disclosure.Button className="py-2 w-full rounded hover:bg-skin-popover-hover focus:outline-none focus:ring-1 focus:ring-skin-base">
+            <FolderDisplay title={title} open={open} />
+          </Disclosure.Button>
+          <Disclosure.Panel className="ml-5">{contents}</Disclosure.Panel>
+        </div>
+      )}
     </Disclosure>
   );
 };
@@ -122,13 +155,8 @@ const PageIndexSidebar = ({ sideBarOpen }) => {
   `);
 
   return (
-    <div className="flex-shrink-0 bg-skin-popover text-skin-base w-3/4 lg:w-1/2 2xl:w-1/3">
+    <div className="flex-shrink-0 bg-skin-popover text-skin-base select-none w-3/4 lg:w-1/2 2xl:w-1/3">
       <MemoPageList data={data} />
-      {/* <ul>
-        {pages.map(({ title }) => (
-          <li key={title}>{title}</li>
-        ))}
-      </ul> */}
     </div>
   );
 };

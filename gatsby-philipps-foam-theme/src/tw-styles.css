@@ -7,6 +7,7 @@
     --color-text-base: 0, 0, 0;
     --color-text-secondary: 51, 65, 85;
     --color-text-link: 99, 102, 241;
+    --color-text-icon: 106, 109, 113;
 
     --color-accent: 129, 140, 248;
 
@@ -40,6 +41,7 @@
     --color-text-base: 255, 255, 255;
     --color-text-secondary: 199, 206, 214;
     --color-text-link: 96, 165, 250;
+    --color-text-icon: 96, 108, 133;
 
     --color-accent: 96, 165, 250;
 

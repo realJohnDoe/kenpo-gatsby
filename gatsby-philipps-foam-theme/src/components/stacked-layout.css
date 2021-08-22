@@ -53,16 +53,6 @@ hr {
   overflow: visible;
 }
 
-a {
-  color: var(--link);
-  text-decoration: underline;
-  transition: color 0.3s ease;
-}
-
-a:hover {
-  text-decoration: none;
-}
-
 h1 {
   font-size: 1.875rem;
   margin-top: 1rem;
