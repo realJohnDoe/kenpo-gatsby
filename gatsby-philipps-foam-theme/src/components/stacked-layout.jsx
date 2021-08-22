@@ -11,6 +11,7 @@ import './custom.css';
 import Header from './header';
 import Note from './note';
 import NoteWrapper from './note-wrapper';
+import PageIndexSidebar from './page-index-sidebar';
 import SEO from './seo';
 import './stacked-layout.css';
 import './theme.css';
@@ -29,30 +30,33 @@ const Content = ({ windowWidth, scrollContainer, stackedPages, index }) => {
   });
 
   return (
-    <div className="layout">
+    <div className="layout min-h-screen flex flex-col">
       <SEO title={stackedPages[stackedPages.length - 1].data.title} />
       <Header />
-      <div className="note-columns-scrolling-container" ref={scrollContainer}>
-        <div
-          className="note-columns-container"
-          style={{ width: 625 * (stackedPages.length + 1) }}
-        >
-          {stackedPages.map((page, i) => (
-            <NoteWrapper
-              key={page.slug}
-              i={typeof index !== 'undefined' ? index : i}
-              slug={page.slug}
-              title={page.data.title}
-            >
-              <Note
+      <div className="flex-grow flex">
+        <PageIndexSidebar />
+        <div className="note-columns-scrolling-container" ref={scrollContainer}>
+          <div
+            className="note-columns-container"
+            style={{ width: 625 * (stackedPages.length + 1) }}
+          >
+            {stackedPages.map((page, i) => (
+              <NoteWrapper
+                key={page.slug}
+                i={typeof index !== 'undefined' ? index : i}
+                slug={page.slug}
                 title={page.data.title}
-                mdx={page.data.mdx}
-                inboundReferences={page.data.inboundReferences}
-                outboundReferences={page.data.outboundReferences}
-                headings={page.data.headings}
-              />
-            </NoteWrapper>
-          ))}
+              >
+                <Note
+                  title={page.data.title}
+                  mdx={page.data.mdx}
+                  inboundReferences={page.data.inboundReferences}
+                  outboundReferences={page.data.outboundReferences}
+                  headings={page.data.headings}
+                />
+              </NoteWrapper>
+            ))}
+          </div>
         </div>
       </div>
     </div>
