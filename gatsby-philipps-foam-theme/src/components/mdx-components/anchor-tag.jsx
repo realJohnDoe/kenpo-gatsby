@@ -1,7 +1,7 @@
 import { MDXProvider } from '@mdx-js/react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/animations/shift-away.css';
-import { graphql, useStaticQuery, withPrefix } from 'gatsby';
+import { withPrefix } from 'gatsby';
 import React from 'react';
 import { LinkToStacked } from 'react-stacked-pages-hook';
 // import './anchor-tag.css';
@@ -65,13 +65,13 @@ export const AnchorTag = ({
     popupContent = (
       <div id={ref.id} className="tw-popover">
         {ref.title === ref.displayTitle ? (
-          <React.Fragment>
+          <>
             <MDXProvider components={nestedComponents}>
               <MDXRenderer>{ref.mdx}</MDXRenderer>
             </MDXProvider>
-          </React.Fragment>
+          </>
         ) : (
-          <React.Fragment>
+          <>
             <h5>{ref.displayTitle}</h5>
             <ul>
               <li>
@@ -80,7 +80,7 @@ export const AnchorTag = ({
                 </MDXProvider>
               </li>
             </ul>
-          </React.Fragment>
+          </>
         )}
       </div>
     );
@@ -91,9 +91,6 @@ export const AnchorTag = ({
     );
   } else {
     content = restProps.children;
-
-    const hrefPathaArray = href.split('/');
-    const last = hrefPathaArray[hrefPathaArray.length - 1];
 
     if (isLinkToExcludedPage({ href, withoutLink, title, content })) {
       return (
@@ -114,6 +111,7 @@ export const AnchorTag = ({
     popupContent = <div className="tw-popover">{href}</div>;
     // eslint-disable-next-line jsx-a11y/anchor-has-content
     child = (
+      // eslint-disable-next-line jsx-a11y/anchor-has-content
       <a
         {...restProps}
         href={
@@ -127,12 +125,7 @@ export const AnchorTag = ({
   }
 
   return (
-    <Tippy
-      animation="shift-away"
-      content={popupContent}
-      maxWidth="none"
-      arrow={true}
-    >
+    <Tippy animation="shift-away" content={popupContent} maxWidth="none" arrow>
       {child}
     </Tippy>
   );

@@ -78,7 +78,7 @@ const NotesLayout = ({ location, slug, data }) => {
   let activeIndex;
   if (windowWidth <= 800) {
     const activeSlug = Object.keys(state.stackedPageStates).find(
-      (slug) => state.stackedPageStates[slug].active
+      (s) => state.stackedPageStates[s].active
     );
     activeIndex = state.stackedPages.findIndex(
       (page) => page.slug === activeSlug
