@@ -170,8 +170,8 @@ const PageIndexSidebar = ({ sideBarOpen }) => {
   return (
     <div
       className={classNames(
-        'flex-shrink-0 bg-skin-sidebar text-skin-base select-none border-r border-skin-base transition-all motion-reduce:transition-none',
-        sideBarOpen ? 'w-3/4 lg:w-1/2 2xl:w-1/3' : 'w-0'
+        'overflow-y-auto flex-shrink-0 bg-skin-sidebar text-skin-base select-none border-r border-skin-base transition-all motion-reduce:transition-none',
+        sideBarOpen ? 'w-3/4 md:w-1/2 lg:w-1/3 2xl:w-96' : 'w-0'
       )}
     >
       <MemoPageList data={data} />
