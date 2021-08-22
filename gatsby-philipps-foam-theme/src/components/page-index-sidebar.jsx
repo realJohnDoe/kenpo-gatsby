@@ -96,16 +96,29 @@ const FileDisplay = ({ file }) => (
 );
 
 const PageEntriesDisplay = ({ object, title = null }) => {
+  const keys = Object.keys(object);
+
+  const sortOrder = (key) => {
+    if ('type' in object[key]) return -1;
+    return 0;
+  };
+
+  const sortedKeys = keys.sort((a, b) => {
+    if (sortOrder(b) < sortOrder(a)) return -1;
+    if (object[a].displayName < object[b].displayName) return -1;
+    return 1;
+  });
+
   const contents = (
     <>
-      {Object.keys(object).map((key) => (
-        <>
+      {sortedKeys.map((key) => (
+        <div key={key}>
           {'type' in object[key] ? (
             <FileDisplay file={object[key]} />
           ) : (
             <PageEntriesDisplay object={object[key]} title={key} />
           )}
-        </>
+        </div>
       ))}
     </>
   );
