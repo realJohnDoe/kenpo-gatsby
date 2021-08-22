@@ -73,6 +73,8 @@ module.exports = {
           'popover-overlay': 'var(--color-background-popover-overlay)',
           thead: withOpacity('--color-background-table-head'),
           'table-odd': withOpacity('--color-background-table-odd'),
+          sidebar: withOpacity('--color-background-sidebar'),
+          'sidebar-hover': withOpacity('--color-background-sidebar-hover'),
         },
       },
       borderColor: {

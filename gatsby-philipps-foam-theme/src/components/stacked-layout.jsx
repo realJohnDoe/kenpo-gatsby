@@ -1,5 +1,5 @@
 import { useWindowWidth } from '@react-hook/window-size';
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import {
   StackedPagesProvider,
   useStackedPagesProvider,
@@ -21,6 +21,7 @@ let themeInitialized = false;
 const Content = ({ windowWidth, scrollContainer, stackedPages, index }) => {
   useKeyboardListeners();
   const { theme, setTheme } = useThemeState();
+  const [sideBarOpen, setSideBarOpen] = useState(false);
 
   useEffect(() => {
     if (!themeInitialized) {
@@ -32,9 +33,9 @@ const Content = ({ windowWidth, scrollContainer, stackedPages, index }) => {
   return (
     <div className="layout min-h-screen flex flex-col">
       <SEO title={stackedPages[stackedPages.length - 1].data.title} />
-      <Header />
+      <Header sideBarOpen={sideBarOpen} setSideBarOpen={setSideBarOpen} />
       <div className="flex-grow flex">
-        <PageIndexSidebar />
+        <PageIndexSidebar sideBarOpen={sideBarOpen} />
         <div className="note-columns-scrolling-container" ref={scrollContainer}>
           <div
             className="note-columns-container"

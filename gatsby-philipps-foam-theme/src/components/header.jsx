@@ -6,7 +6,7 @@ import DarkModeToggle from './dark-mode-toggle';
 import GraphButton2 from './graph-button2';
 import SearchButton from './search-button';
 
-const Header = () => {
+const Header = ({ sideBarOpen, setSideBarOpen }) => {
   const siteMetadata = useSiteMetadata();
 
   return (
@@ -14,6 +14,7 @@ const Header = () => {
       <div className="flex items-center justify-between">
         <div>
           <button
+            onClick={() => setSideBarOpen(!sideBarOpen)}
             type="button"
             className="p-2 rounded hover:opacity-60 focus:outline-none focus:ring focus:ring-skin-base"
           >

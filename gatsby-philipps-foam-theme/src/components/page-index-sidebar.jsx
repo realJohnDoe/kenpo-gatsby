@@ -86,7 +86,7 @@ const FolderDisplay = ({ title, open }) => (
 const FileDisplay = ({ file }) => (
   <LinkToStacked
     to={file.linkPath}
-    className="block m-1 py-2 rounded hover:bg-skin-popover-hover focus:outline-none focus:ring-1 focus:ring-skin-base"
+    className="block m-1 py-2 rounded hover:bg-skin-sidebar-hover focus:outline-none focus:ring-1 focus:ring-skin-base"
   >
     <div className="flex items-center ">
       <DocumentTextIcon className="w-4 h-4 mx-2 text-skin-icon" />
@@ -117,7 +117,7 @@ const PageEntriesDisplay = ({ object, title = null }) => {
     <Disclosure>
       {({ open }) => (
         <div className="m-1">
-          <Disclosure.Button className="py-2 w-full rounded hover:bg-skin-popover-hover focus:outline-none focus:ring-1 focus:ring-skin-base">
+          <Disclosure.Button className="py-2 w-full rounded hover:bg-skin-sidebar-hover focus:outline-none focus:ring-1 focus:ring-skin-base">
             <FolderDisplay title={title} open={open} />
           </Disclosure.Button>
           <Disclosure.Panel className="ml-5">{contents}</Disclosure.Panel>
@@ -155,7 +155,12 @@ const PageIndexSidebar = ({ sideBarOpen }) => {
   `);
 
   return (
-    <div className="flex-shrink-0 bg-skin-popover text-skin-base select-none w-3/4 lg:w-1/2 2xl:w-1/3">
+    <div
+      className={classNames(
+        'flex-shrink-0 bg-skin-sidebar text-skin-base select-none border-r border-skin-base transition-all motion-reduce:transition-none',
+        sideBarOpen ? 'w-3/4 lg:w-1/2 2xl:w-1/3' : 'w-0'
+      )}
+    >
       <MemoPageList data={data} />
     </div>
   );
