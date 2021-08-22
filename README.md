@@ -14,6 +14,7 @@ Changes made to original:
 - Reworked search UI
 - Change graph diagram (redo with `@antv/g6`)
 - Small table of contents at frame header (like GitHub has now)
+- Page index as folder structure
 
 ## Install
 
