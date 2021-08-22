@@ -59,7 +59,8 @@ module.exports = {
           secondary: withOpacity('--color-text-secondary'),
           link: withOpacity('--color-text-link'),
           thead: withOpacity('--color-text-table-head'),
-          tbody: withOpacity('--color-text-table-body')
+          tbody: withOpacity('--color-text-table-body'),
+          icon: withOpacity('--color-text-icon'),
         },
       },
       backgroundColor: {
@@ -71,7 +72,9 @@ module.exports = {
           'popover-hover': withOpacity('--color-background-popover-hover'),
           'popover-overlay': 'var(--color-background-popover-overlay)',
           thead: withOpacity('--color-background-table-head'),
-          'table-odd': withOpacity('--color-background-table-odd')
+          'table-odd': withOpacity('--color-background-table-odd'),
+          sidebar: withOpacity('--color-background-sidebar'),
+          'sidebar-hover': withOpacity('--color-background-sidebar-hover'),
         },
       },
       borderColor: {
