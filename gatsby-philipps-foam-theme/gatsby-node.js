@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const fs = require(`fs`);
 const path = require(`path`);
 const { urlResolve } = require(`gatsby-core-utils`);
@@ -144,12 +145,7 @@ exports.createPages = async ({ graphql, actions }, options) => {
       throw new Error(`Could not query notes`, result.errors);
     }
 
-    await copyFile(
-      path.join(__dirname, './templates/local-file.template'),
-      path.join(__dirname, './src/templates/local-file.js')
-    );
-
-    const LocalFileTemplate = require.resolve(`./src/templates/local-file`);
+    const LocalFileTemplate = require.resolve(`./src/templates/local-file.jsx`);
 
     const localFiles = result.data.allFile.nodes
       .filter((node) => shouldHandleFile(node, options))
@@ -177,20 +173,5 @@ exports.createPages = async ({ graphql, actions }, options) => {
         });
       }
     }
-  } else {
-    try {
-      await fs.promises.unlink(
-        path.join(__dirname, './src/templates/local-file.js')
-      );
-    } catch (err) {}
   }
-
-  try {
-    await fs.promises.unlink(
-      path.join(__dirname, './src/templates/roam-block.js')
-    );
-    await fs.promises.unlink(
-      path.join(__dirname, './src/templates/roam-page.js')
-    );
-  } catch (err) {}
 };

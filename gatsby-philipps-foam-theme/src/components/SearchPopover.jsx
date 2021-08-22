@@ -2,6 +2,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { navigate } from 'gatsby';
 import React, { Fragment, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import useDebounce from '../hooks/useDebounce';
 import useSearchPopover from '../state/useSearchPopover';
 import useSearch from '../use-search';
 
@@ -29,8 +30,17 @@ const SearchPopover = () => {
   const [query, setQuery] = useState('');
   const inputRef = useRef();
 
-  const results = useSearch(query);
-  console.log('results', results);
+  const debouncedQuery = useDebounce(query, 250);
+  const results = useSearch(debouncedQuery);
+
+  // otherwise / from keyboard command will end up in search
+  const debouncedOpen = useDebounce(isOpen, 20);
+
+  const changeQuery = (val) => {
+    if (isOpen && debouncedOpen) {
+      setQuery(val);
+    }
+  };
 
   return createPortal(
     <Transition.Root show={isOpen} as={Fragment}>
@@ -68,7 +78,7 @@ const SearchPopover = () => {
                 className="bg-skin-popover-hover text-skin-base rounded w-full py-4 px-3 text-xl focus:outline-none"
                 type="text"
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={(e) => changeQuery(e.target.value)}
                 ref={inputRef}
               />
               {results && results.length > 0 && (
@@ -78,6 +88,26 @@ const SearchPopover = () => {
                       <SearchResult result={r} key={r.path} />
                     ))}
                   </ul>
+                </div>
+              )}
+              {results !== null && results.length === 0 && (
+                <div className="py-3 text-skin-secondary text-lg font-semibold flex">
+                  <span className="flex mx-auto">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5 my-auto"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+
+                    <span className="ml-2 text-skin-base">No matches...</span>
+                  </span>
                 </div>
               )}
             </div>

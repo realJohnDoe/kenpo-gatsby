@@ -5,7 +5,6 @@ require("dotenv").config({
 });
 
 module.exports = {
-  flags: { PRESERVE_WEBPACK_CACHE: true },
   pathPrefix: `/gatsby-philipps-foam-theme`,
   siteMetadata: {
     title: `Philipps Foam Template`,
@@ -22,6 +21,7 @@ module.exports = {
           "**/.git/**",
           "**/.github/**",
           "**/.vscode/**",
+          "**/private/**/*",
         ],
       },
     },
