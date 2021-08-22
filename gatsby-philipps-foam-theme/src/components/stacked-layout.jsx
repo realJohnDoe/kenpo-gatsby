@@ -34,7 +34,7 @@ const Content = ({ windowWidth, scrollContainer, stackedPages, index }) => {
     <div className="layout min-h-screen max-h-screen flex flex-col">
       <SEO title={stackedPages[stackedPages.length - 1].data.title} />
       <Header sideBarOpen={sideBarOpen} setSideBarOpen={setSideBarOpen} />
-      <div className="flex  max-h-screen overflow-hidden">
+      <div className="flex flex-grow max-h-screen overflow-hidden">
         <PageIndexSidebar sideBarOpen={sideBarOpen} />
         <div className="note-columns-scrolling-container" ref={scrollContainer}>
           <div
