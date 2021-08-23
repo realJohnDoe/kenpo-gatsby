@@ -84,16 +84,20 @@ export const AnchorTag = ({
         )}
       </div>
     );
+    const withoutBrackes = content.replace(/^\[\[/, '').replace(/\]\]$/, '');
     child = (
-      <LinkToStacked {...restProps} to={ref.slug} title={title}>
-        {content}
-      </LinkToStacked>
+      <>
+        <span className="text-skin-secondary">[[</span>
+        <LinkToStacked {...restProps} to={ref.slug} title={title}>
+          {withoutBrackes}
+        </LinkToStacked>
+        <span className="text-skin-secondary">]]</span>
+      </>
     );
   } else {
     content = restProps.children;
     const externalLink = /^(http(s?)):\/\//i.test(href);
 
-    console.log({ externalLink, withoutLink, content });
     if (isLinkToExcludedPage({ externalLink, withoutLink, content })) {
       return (
         <span className="px-1 rounded bg-skin-secondary text-skin-secondary cursor-not-allowed tracking-wide">
