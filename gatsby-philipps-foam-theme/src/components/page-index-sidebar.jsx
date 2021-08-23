@@ -4,35 +4,6 @@ import { Disclosure } from '@headlessui/react';
 import { ChevronRightIcon, DocumentTextIcon } from '@heroicons/react/outline';
 import { LinkToStacked } from 'react-stacked-pages-hook';
 import classNames from '../utils/classNames';
-
-// the plugin gets a root folder for all contents
-// e.g. when it ist path/to/notes all files have the prefix /notes
-// this function determines the prefix so it can be removed as it is the root folder
-function getCommonPrefix(pages) {
-  const prefixMap = new Map();
-
-  for (let i = 0; i < pages.length; i += 1) {
-    const pathSplit = pages[i].slug.split('/');
-    if (pathSplit.length > 1) {
-      const prefix = pathSplit[1]; // becuse the slug starts with /
-
-      if (prefixMap.has(prefix)) {
-        const count = prefixMap.get(prefix);
-        if (count <= 3) {
-          prefixMap.set(prefix, count + 1);
-        } else {
-          // return prefix when found at least 4 times
-          return `/${prefix}/`;
-        }
-      } else {
-        prefixMap.set(prefix, 1);
-      }
-    }
-  }
-
-  return null;
-}
-
 // returns an object that mimics the path structure of the pages
 function getPathStructure(pages) {
   const structure = {};
@@ -52,13 +23,9 @@ function getPathStructure(pages) {
     schema[indexName] = { type: 'file', displayName, linkPath };
   };
 
-  const commonPrefix = getCommonPrefix(pages);
-
   for (let i = 0; i < pages.length; i += 1) {
     // remove leading /
-    const displayPath = pages[i].slug
-      .replace(commonPrefix, '')
-      .replace(/^\//, '');
+    const displayPath = pages[i].slug.replace(/^\//, '');
 
     const page = {
       displayPath,
