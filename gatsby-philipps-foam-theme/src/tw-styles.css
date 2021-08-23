@@ -101,7 +101,7 @@ body {
   }
 
   .tw-link {
-    @apply p-1 rounded text-skin-link underline hover:text-opacity-75 focus:outline-none focus:ring active:ring ring-skin-base;
+    @apply p-1 rounded text-skin-link underline hover:text-opacity-75 focus:outline-none focus:ring-1 active:ring-1 ring-skin-base;
   }
 
   .min-w-80px {
