@@ -4,7 +4,7 @@ import 'tippy.js/animations/shift-away.css';
 import { withPrefix } from 'gatsby';
 import React from 'react';
 import { LinkToStacked } from 'react-stacked-pages-hook';
-// import './anchor-tag.css';
+import { ExternalLinkIcon } from '@heroicons/react/outline';
 import MDXRenderer from './mdx-renderer';
 
 const custBasename = (filePath) => {
@@ -115,19 +115,41 @@ export const AnchorTag = ({
     }
 
     popupContent = <div className="tw-popover">{href}</div>;
-    // eslint-disable-next-line jsx-a11y/anchor-has-content
-    child = (
+
+    if (externalLink) {
       // eslint-disable-next-line jsx-a11y/anchor-has-content
-      <a
-        {...restProps}
-        href={
-          !href || (href.indexOf && href.indexOf('#') === 0)
-            ? href
-            : withPrefix(href)
-        }
-        title={title}
-      />
-    );
+      child = (
+        <span className="inline-flex items-center">
+          {/* eslint-disable-next-line jsx-a11y/anchor-has-content,react/jsx-no-target-blank */}
+          <a
+            {...restProps}
+            href={
+              !href || (href.indexOf && href.indexOf('#') === 0)
+                ? href
+                : withPrefix(href)
+            }
+            title={title}
+            target="_blank"
+            rel="noopener noreferrer"
+          />
+          <ExternalLinkIcon className="inline-block text-skin-secondary w-4 h-4" />
+        </span>
+      );
+    } else {
+      // eslint-disable-next-line jsx-a11y/anchor-has-content
+      child = (
+        // eslint-disable-next-line jsx-a11y/anchor-has-content
+        <a
+          {...restProps}
+          href={
+            !href || (href.indexOf && href.indexOf('#') === 0)
+              ? href
+              : withPrefix(href)
+          }
+          title={title}
+        />
+      );
+    }
   }
 
   return (
