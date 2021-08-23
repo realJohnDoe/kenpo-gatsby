@@ -12,12 +12,12 @@ const custBasename = (filePath) => {
   return split[split.length - 1];
 };
 
-function isLinkToExcludedPage({ href, withoutLink, title, content }) {
-  const hrefPathaArray = href.split('/');
-  const last = hrefPathaArray[hrefPathaArray.length - 1];
+function isLinkToExcludedPage({ externalLink, content }) {
+  // check if has square brackets
+  const brackets = /\[\[.*\]\]/i.test(content);
 
   // strange but with that we can be sure that it points to an excluded page
-  if (withoutLink === undefined && title && last === content) {
+  if (externalLink === false && brackets === true) {
     return true;
   }
 
@@ -91,8 +91,10 @@ export const AnchorTag = ({
     );
   } else {
     content = restProps.children;
+    const externalLink = /^(http(s?)):\/\//i.test(href);
 
-    if (isLinkToExcludedPage({ href, withoutLink, title, content })) {
+    console.log({ externalLink, withoutLink, content });
+    if (isLinkToExcludedPage({ externalLink, withoutLink, content })) {
       return (
         <span className="px-1 rounded bg-skin-secondary text-skin-secondary cursor-not-allowed tracking-wide">
           excluded page
