@@ -14,7 +14,7 @@ Changes made to original:
 - Reworked search UI
 - Change graph diagram (redo with `@antv/g6`)
 - Small table of contents at frame header (like GitHub has now)
-- Page index as folder structure
+- Sidbar with pages as folder structure
 
 ## Install
 
@@ -40,6 +40,8 @@ Take a look into the [_layouts folder in the example directory](https://github.c
    ```
 
 2. Add the configuration to your `gatsby-config.js` file
+
+  [Config options explained](https://github.com/phartenfeller/gatsby-philipps-foam-theme/wiki)
 
    ```js
    // gatsby-config.js
