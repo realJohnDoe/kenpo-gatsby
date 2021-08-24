@@ -1,10 +1,10 @@
 import { MDXProvider } from '@mdx-js/react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/animations/shift-away.css';
-import { graphql, useStaticQuery, withPrefix } from 'gatsby';
+import { withPrefix } from 'gatsby';
 import React from 'react';
 import { LinkToStacked } from 'react-stacked-pages-hook';
-// import './anchor-tag.css';
+import { ExternalLinkIcon } from '@heroicons/react/outline';
 import MDXRenderer from './mdx-renderer';
 
 const custBasename = (filePath) => {
@@ -12,12 +12,12 @@ const custBasename = (filePath) => {
   return split[split.length - 1];
 };
 
-function isLinkToExcludedPage({ href, withoutLink, title, content }) {
-  const hrefPathaArray = href.split('/');
-  const last = hrefPathaArray[hrefPathaArray.length - 1];
+function isLinkToExcludedPage({ externalLink, content }) {
+  // check if has square brackets
+  const brackets = /\[\[.*\]\]/i.test(content);
 
   // strange but with that we can be sure that it points to an excluded page
-  if (withoutLink === undefined && title && last === content) {
+  if (externalLink === false && brackets === true) {
     return true;
   }
 
@@ -65,13 +65,13 @@ export const AnchorTag = ({
     popupContent = (
       <div id={ref.id} className="tw-popover">
         {ref.title === ref.displayTitle ? (
-          <React.Fragment>
+          <>
             <MDXProvider components={nestedComponents}>
               <MDXRenderer>{ref.mdx}</MDXRenderer>
             </MDXProvider>
-          </React.Fragment>
+          </>
         ) : (
-          <React.Fragment>
+          <>
             <h5>{ref.displayTitle}</h5>
             <ul>
               <li>
@@ -80,22 +80,25 @@ export const AnchorTag = ({
                 </MDXProvider>
               </li>
             </ul>
-          </React.Fragment>
+          </>
         )}
       </div>
     );
+    const withoutBrackes = content.replace(/^\[\[/, '').replace(/\]\]$/, '');
     child = (
-      <LinkToStacked {...restProps} to={ref.slug} title={title}>
-        {content}
-      </LinkToStacked>
+      <>
+        <span className="text-skin-secondary">[[</span>
+        <LinkToStacked {...restProps} to={ref.slug} title={title}>
+          {withoutBrackes}
+        </LinkToStacked>
+        <span className="text-skin-secondary">]]</span>
+      </>
     );
   } else {
     content = restProps.children;
+    const externalLink = /^(http(s?)):\/\//i.test(href);
 
-    const hrefPathaArray = href.split('/');
-    const last = hrefPathaArray[hrefPathaArray.length - 1];
-
-    if (isLinkToExcludedPage({ href, withoutLink, title, content })) {
+    if (isLinkToExcludedPage({ externalLink, withoutLink, content })) {
       return (
         <span className="px-1 rounded bg-skin-secondary text-skin-secondary cursor-not-allowed tracking-wide">
           excluded page
@@ -112,27 +115,45 @@ export const AnchorTag = ({
     }
 
     popupContent = <div className="tw-popover">{href}</div>;
-    // eslint-disable-next-line jsx-a11y/anchor-has-content
-    child = (
-      <a
-        {...restProps}
-        href={
-          !href || (href.indexOf && href.indexOf('#') === 0)
-            ? href
-            : withPrefix(href)
-        }
-        title={title}
-      />
-    );
+
+    if (externalLink) {
+      // eslint-disable-next-line jsx-a11y/anchor-has-content
+      child = (
+        <span className="inline-flex items-center">
+          {/* eslint-disable-next-line jsx-a11y/anchor-has-content,react/jsx-no-target-blank */}
+          <a
+            {...restProps}
+            href={
+              !href || (href.indexOf && href.indexOf('#') === 0)
+                ? href
+                : withPrefix(href)
+            }
+            title={title}
+            target="_blank"
+            rel="noopener noreferrer"
+          />
+          <ExternalLinkIcon className="inline-block text-skin-secondary w-4 h-4" />
+        </span>
+      );
+    } else {
+      // eslint-disable-next-line jsx-a11y/anchor-has-content
+      child = (
+        // eslint-disable-next-line jsx-a11y/anchor-has-content
+        <a
+          {...restProps}
+          href={
+            !href || (href.indexOf && href.indexOf('#') === 0)
+              ? href
+              : withPrefix(href)
+          }
+          title={title}
+        />
+      );
+    }
   }
 
   return (
-    <Tippy
-      animation="shift-away"
-      content={popupContent}
-      maxWidth="none"
-      arrow={true}
-    >
+    <Tippy animation="shift-away" content={popupContent} maxWidth="none" arrow>
       {child}
     </Tippy>
   );

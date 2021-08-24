@@ -7,6 +7,7 @@
     --color-text-base: 0, 0, 0;
     --color-text-secondary: 51, 65, 85;
     --color-text-link: 99, 102, 241;
+    --color-text-icon: 106, 109, 113;
 
     --color-accent: 129, 140, 248;
 
@@ -17,6 +18,9 @@
     --color-background-popover: var(--color-background-header);
     --color-background-popover-hover: 229, 231, 235;
     --color-background-popover-overlay: rgba(74, 74, 74, 0.5);
+
+    --color-background-sidebar: 246, 250, 255;
+    --color-background-sidebar-hover: 229, 237, 246;
 
     --color-border-base: 203, 213, 225;
 
@@ -40,6 +44,7 @@
     --color-text-base: 255, 255, 255;
     --color-text-secondary: 199, 206, 214;
     --color-text-link: 96, 165, 250;
+    --color-text-icon: 96, 108, 133;
 
     --color-accent: 96, 165, 250;
 
@@ -50,6 +55,9 @@
     --color-background-popover: 17, 24, 39;
     --color-background-popover-hover: 31, 41, 55;
     --color-background-popover-overlay: rgba(60, 60, 60, 0.5);
+
+    --color-background-sidebar: 10, 15, 26;
+    --color-background-sidebar-hover: var(--color-background-popover-hover);
 
     --color-border-base: 48, 48, 48;
 
@@ -93,7 +101,7 @@ body {
   }
 
   .tw-link {
-    @apply p-1 rounded text-skin-link underline hover:text-opacity-75 focus:outline-none focus:ring active:ring ring-skin-base;
+    @apply p-1 rounded text-skin-link underline hover:text-opacity-75 focus:outline-none focus:ring-1 active:ring-1 ring-skin-base;
   }
 
   .min-w-80px {

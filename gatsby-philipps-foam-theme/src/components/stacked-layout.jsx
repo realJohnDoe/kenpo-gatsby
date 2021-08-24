@@ -1,5 +1,6 @@
 import { useWindowWidth } from '@react-hook/window-size';
-import React, { memo, useEffect } from 'react';
+import { graphql, useStaticQuery } from 'gatsby';
+import React, { memo, useEffect, useState } from 'react';
 import {
   StackedPagesProvider,
   useStackedPagesProvider,
@@ -11,6 +12,7 @@ import './custom.css';
 import Header from './header';
 import Note from './note';
 import NoteWrapper from './note-wrapper';
+import PageIndexSidebar from './page-index-sidebar';
 import SEO from './seo';
 import './stacked-layout.css';
 import './theme.css';
@@ -18,8 +20,19 @@ import './theme.css';
 let themeInitialized = false;
 
 const Content = ({ windowWidth, scrollContainer, stackedPages, index }) => {
+  const settings = useStaticQuery(graphql`
+    query themeSettings {
+      philippsFoamThemeConfig {
+        sidebarDisabled
+      }
+    }
+  `);
+
+  const { sidebarDisabled } = settings.philippsFoamThemeConfig;
+
   useKeyboardListeners();
   const { theme, setTheme } = useThemeState();
+  const [sideBarOpen, setSideBarOpen] = useState(false);
 
   useEffect(() => {
     if (!themeInitialized) {
@@ -29,30 +42,37 @@ const Content = ({ windowWidth, scrollContainer, stackedPages, index }) => {
   });
 
   return (
-    <div className="layout">
+    <div className="layout min-h-screen max-h-screen flex flex-col">
       <SEO title={stackedPages[stackedPages.length - 1].data.title} />
-      <Header />
-      <div className="note-columns-scrolling-container" ref={scrollContainer}>
-        <div
-          className="note-columns-container"
-          style={{ width: 625 * (stackedPages.length + 1) }}
-        >
-          {stackedPages.map((page, i) => (
-            <NoteWrapper
-              key={page.slug}
-              i={typeof index !== 'undefined' ? index : i}
-              slug={page.slug}
-              title={page.data.title}
-            >
-              <Note
+      <Header
+        sideBarOpen={sideBarOpen}
+        setSideBarOpen={setSideBarOpen}
+        sidebarDisabled={sidebarDisabled}
+      />
+      <div className="flex flex-grow max-h-screen overflow-hidden">
+        {!sidebarDisabled && <PageIndexSidebar sideBarOpen={sideBarOpen} />}
+        <div className="note-columns-scrolling-container" ref={scrollContainer}>
+          <div
+            className="note-columns-container"
+            style={{ width: 625 * (stackedPages.length + 1) }}
+          >
+            {stackedPages.map((page, i) => (
+              <NoteWrapper
+                key={page.slug}
+                i={typeof index !== 'undefined' ? index : i}
+                slug={page.slug}
                 title={page.data.title}
-                mdx={page.data.mdx}
-                inboundReferences={page.data.inboundReferences}
-                outboundReferences={page.data.outboundReferences}
-                headings={page.data.headings}
-              />
-            </NoteWrapper>
-          ))}
+              >
+                <Note
+                  title={page.data.title}
+                  mdx={page.data.mdx}
+                  inboundReferences={page.data.inboundReferences}
+                  outboundReferences={page.data.outboundReferences}
+                  headings={page.data.headings}
+                />
+              </NoteWrapper>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -74,7 +94,7 @@ const NotesLayout = ({ location, slug, data }) => {
   let activeIndex;
   if (windowWidth <= 800) {
     const activeSlug = Object.keys(state.stackedPageStates).find(
-      (slug) => state.stackedPageStates[slug].active
+      (s) => state.stackedPageStates[s].active
     );
     activeIndex = state.stackedPages.findIndex(
       (page) => page.slug === activeSlug

@@ -66,6 +66,13 @@ function getTitle(node, content) {
   );
 }
 
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions;
+  createTypes(`type PhilippsFoamThemeConfig implements Node {
+sidebarDisabled: Boolean!
+}`);
+};
+
 exports.onCreateNode = async ({ node, actions, loadNodeContent }, options) => {
   const { createNodeField } = actions;
 
@@ -81,6 +88,28 @@ exports.onCreateNode = async ({ node, actions, loadNodeContent }, options) => {
       value: getTitle(node, await loadNodeContent(node)),
     });
   }
+};
+
+exports.sourceNodes = (
+  { actions: { createNode }, createNodeId, createContentDigest },
+  { sidebarDisabled = false }
+) => {
+  const themeConfig = {
+    sidebarDisabled,
+  };
+
+  createNode({
+    ...themeConfig,
+    id: createNodeId(`philipps-foam-theme-config`),
+    parent: null,
+    children: [],
+    internal: {
+      type: `PhilippsFoamThemeConfig`,
+      contentDigest: createContentDigest(themeConfig),
+      content: JSON.stringify(themeConfig),
+      description: `Configuration Options for gatsby-philipps-foam-theme`,
+    },
+  });
 };
 
 exports.createResolvers = ({ createResolvers }) => {
