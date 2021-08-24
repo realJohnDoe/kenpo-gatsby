@@ -1,4 +1,5 @@
 import { useWindowWidth } from '@react-hook/window-size';
+import { graphql, useStaticQuery } from 'gatsby';
 import React, { memo, useEffect, useState } from 'react';
 import {
   StackedPagesProvider,
@@ -19,6 +20,16 @@ import './theme.css';
 let themeInitialized = false;
 
 const Content = ({ windowWidth, scrollContainer, stackedPages, index }) => {
+  const settings = useStaticQuery(graphql`
+    query themeSettings {
+      philippsFoamThemeConfig {
+        sidebarDisabled
+      }
+    }
+  `);
+
+  const { sidebarDisabled } = settings.philippsFoamThemeConfig;
+
   useKeyboardListeners();
   const { theme, setTheme } = useThemeState();
   const [sideBarOpen, setSideBarOpen] = useState(false);
@@ -33,9 +44,13 @@ const Content = ({ windowWidth, scrollContainer, stackedPages, index }) => {
   return (
     <div className="layout min-h-screen max-h-screen flex flex-col">
       <SEO title={stackedPages[stackedPages.length - 1].data.title} />
-      <Header sideBarOpen={sideBarOpen} setSideBarOpen={setSideBarOpen} />
+      <Header
+        sideBarOpen={sideBarOpen}
+        setSideBarOpen={setSideBarOpen}
+        sidebarDisabled={sidebarDisabled}
+      />
       <div className="flex flex-grow max-h-screen overflow-hidden">
-        <PageIndexSidebar sideBarOpen={sideBarOpen} />
+        {!sidebarDisabled && <PageIndexSidebar sideBarOpen={sideBarOpen} />}
         <div className="note-columns-scrolling-container" ref={scrollContainer}>
           <div
             className="note-columns-container"

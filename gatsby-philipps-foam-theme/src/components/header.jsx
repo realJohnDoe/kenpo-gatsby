@@ -6,20 +6,22 @@ import DarkModeToggle from './dark-mode-toggle';
 import GraphButton2 from './graph-button2';
 import SearchButton from './search-button';
 
-const Header = ({ sideBarOpen, setSideBarOpen }) => {
+const Header = ({ sideBarOpen, setSideBarOpen, sidebarDisabled }) => {
   const siteMetadata = useSiteMetadata();
 
   return (
     <header className="pl-4 pr-8 w-full flex flex-wrap justify-between items-center bg-skin-header text-skin-base border-b border-skin-base z-10">
       <div className="flex items-center justify-between">
         <div>
-          <button
-            onClick={() => setSideBarOpen(!sideBarOpen)}
-            type="button"
-            className="p-2 rounded hover:opacity-60 focus:outline-none focus:ring focus:ring-skin-base"
-          >
-            <MenuIcon className="w-5 h-5" />
-          </button>
+          {!sidebarDisabled && (
+            <button
+              onClick={() => setSideBarOpen(!sideBarOpen)}
+              type="button"
+              className="p-2 rounded hover:opacity-60 focus:outline-none focus:ring focus:ring-skin-base"
+            >
+              <MenuIcon className="w-5 h-5" />
+            </button>
+          )}
         </div>
         <Link
           to="/"
