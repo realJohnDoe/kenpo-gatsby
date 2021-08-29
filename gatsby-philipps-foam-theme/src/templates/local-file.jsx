@@ -1,11 +1,9 @@
-import { graphql } from "gatsby";
+import { graphql } from 'gatsby';
 
-import StackedLayout from "../components/stacked-layout";
-
-export default StackedLayout;
+import StackedLayout from '../components/stacked-layout';
 
 export const pageQuery = graphql`
-  query($id: String!) {
+  query ($id: String!) {
     file(id: { eq: $id }) {
       childMdx {
         body
@@ -18,3 +16,5 @@ export const pageQuery = graphql`
     }
   }
 `;
+
+export default StackedLayout;

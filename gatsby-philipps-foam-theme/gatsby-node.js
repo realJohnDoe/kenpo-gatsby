@@ -140,7 +140,7 @@ exports.createResolvers = ({ createResolvers }) => {
   createResolvers(resolvers);
 };
 
-exports.createPages = async ({ graphql, actions }, options) => {
+exports.createPages = async ({ graphql, actions, reporter }, options) => {
   const { createPage } = actions;
 
   if (contentPath) {
@@ -191,7 +191,18 @@ exports.createPages = async ({ graphql, actions }, options) => {
     });
 
     if (rootNote) {
-      const root = localFiles.find((node) => node.fields.slug === rootNote);
+      // backwards compatibility
+      const withoutLeadingSlash = rootNote.replace(/^\//, '');
+      if (withoutLeadingSlash === 'index') {
+        reporter.error(
+          `You root note is named "index". This causes errors please rename it.`
+        );
+        return;
+      }
+
+      const root = localFiles.find(
+        (node) => node.fields.slug.replace(/^\//, '') === withoutLeadingSlash
+      );
       if (root) {
         createPage({
           path: basePath,
@@ -200,7 +211,15 @@ exports.createPages = async ({ graphql, actions }, options) => {
             id: root.id,
           },
         });
+      } else {
+        reporter.error(
+          `Error initializing root node. No note found with filename "${withoutLeadingSlash}"`
+        );
       }
+    } else {
+      reporter.error(
+        `You need to specify a root node to generate an index page...`
+      );
     }
   }
 };
