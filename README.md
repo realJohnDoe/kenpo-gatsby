@@ -82,6 +82,12 @@ Take a look into the [_layouts folder in the example directory](https://github.c
 
 4. Run your site using `gatsby develop` and navigate to your notes. If you used the above configuration, your URL will be `http://localhost:8000/{basePath}`
 
+## Troubleshooting
+
+Often times it is enough to delete the `.cache` and `public` folder and try the build again.
+
+If this does not help feel free to [open an issue](https://github.com/phartenfeller/gatsby-philipps-foam-theme/issues/new)
+
 ## Development
 
 This is a yarn workspace. Just run `yarn` in the root to install.
