@@ -1,5 +1,5 @@
-import React from "react";
-import { mdx } from "@mdx-js/react";
+import { mdx } from '@mdx-js/react';
+import React from 'react';
 
 export default function MDXRenderer({ children, ...props }) {
   // Memoize the compiled component
@@ -8,7 +8,7 @@ export default function MDXRenderer({ children, ...props }) {
       return null;
     }
 
-    const fn = new Function(`_fn`, "React", "mdx", `${children}`);
+    const fn = new Function(`_fn`, 'React', 'mdx', `${children}`);
 
     return fn({}, React, mdx);
   }, [children]);

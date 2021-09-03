@@ -11,6 +11,7 @@
   },
   "workspaces": [
     "gatsby-philipps-foam-theme",
-    "example/_layouts"
+    "example/_layouts",
+    "gatsby-remark-foam-links"
   ]
 }

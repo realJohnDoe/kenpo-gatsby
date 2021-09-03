@@ -18,8 +18,7 @@ module.exports = (options) => {
         options: {
           extensions: [`.md`, `.mdx`],
           gatsbyRemarkPlugins: [
-            'gatsby-remark-double-brackets-link',
-            'gatsby-remark-double-parenthesis-link',
+            `gatsby-remark-foam-links`,
             {
               resolve: `gatsby-remark-images`,
               options: {
