@@ -1,21 +1,12 @@
-import { MDXProvider } from '@mdx-js/react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/animations/shift-away.css';
 import { withPrefix } from 'gatsby';
 import React from 'react';
-import { LinkToStacked } from 'react-stacked-pages-hook';
 import { ExternalLinkIcon } from '@heroicons/react/outline';
-import MDXRenderer from './mdx-renderer';
-
-const custBasename = (filePath) => {
-  const split = filePath.split('/');
-  return split[split.length - 1];
-};
 
 export const AnchorTag = ({
   title,
   href,
-  references = [],
   withoutLink,
   withoutPopup,
   ...restProps
