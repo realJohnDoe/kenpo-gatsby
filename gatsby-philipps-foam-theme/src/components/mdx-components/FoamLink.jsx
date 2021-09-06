@@ -52,7 +52,8 @@ export const FoamLink = ({ children }) => {
         maxWidth="none"
         arrow
       >
-        <LinkToStacked to={page.href} title={page.title}>
+        {/* I dont know why to add a slash but it fixes links to other subfolders */}
+        <LinkToStacked to={`/${page.href}`} title={page.title}>
           {children}
         </LinkToStacked>
       </Tippy>

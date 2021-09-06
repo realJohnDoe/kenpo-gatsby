@@ -1,5 +1,14 @@
 import { graphql, useStaticQuery } from 'gatsby';
 
+const getHref = (relativePath) => {
+  let href = relativePath.replace(/\.md|\.mdx/, '');
+  // pages from subdir must add leading slash
+  if (href.match(/\//g) > 0 && href.charAt(0) !== '/') {
+    href = `/${href}`;
+  }
+  return href;
+};
+
 export default () => {
   const data = useStaticQuery(graphql`
     {
@@ -20,7 +29,7 @@ export default () => {
 
   const pages = data.allFile.nodes.map((node) => ({
     name: node.name,
-    href: node.relativePath.replace(/\.md|\.mdx/, ''),
+    href: getHref(node.relativePath),
     title: node.fields.title,
     mdx: node.childMdx.body,
   }));
