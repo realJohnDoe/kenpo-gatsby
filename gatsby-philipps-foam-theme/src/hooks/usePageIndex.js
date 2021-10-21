@@ -1,7 +1,7 @@
 import { graphql, useStaticQuery } from 'gatsby';
 
 const getHref = (relativePath) => {
-  let href = relativePath.replace(/\.md|\.mdx/, '');
+  let href = relativePath.replace(/(\.mdx)|(\.md)/g, '');
   // pages from subdir must add leading slash
   if (href.match(/\//g) > 0 && href.charAt(0) !== '/') {
     href = `/${href}`;
