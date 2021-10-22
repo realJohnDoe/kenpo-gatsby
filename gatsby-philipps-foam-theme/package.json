@@ -1,6 +1,6 @@
 {
   "name": "gatsby-philipps-foam-theme",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "My personal gatsby theme for foam",
   "repository": {
     "url": "https://github.com/phartenfeller/gatsby-philipps-foam-theme",
@@ -76,9 +76,11 @@
     "prettier": "^2.3.2"
   },
   "browserslist": [
-    ">1%",
+    ">0.5%",
+    "last 2 versions",
     "not dead",
     "not IE > 0",
-    "not op_mini all"
+    "not op_mini all",
+    "not UCAndroid  > 0"
   ]
 }
