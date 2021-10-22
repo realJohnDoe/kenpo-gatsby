@@ -43,6 +43,7 @@ const getLanguage = (className) => {
       return StreamLanguage.define(yaml);
     default:
       if (lang) {
+        // eslint-disable-next-line no-console
         console.warn(
           `Unhandeled language in CodeMirror ${lang}. Fallback to default JavaScript`
         );
@@ -68,6 +69,7 @@ const CodeMirror = ({ children, className }) => {
 
       editorRef.current = new EditorView({
         state: EditorState.create({
+          readOnly: true,
           doc: children,
           extensions: [
             lineNumbers(),
@@ -75,6 +77,7 @@ const CodeMirror = ({ children, className }) => {
             oneDark,
             FontSizeTheme,
             EditorView.editable.of(false),
+            EditorState.tabSize.of(2),
           ],
         }),
         parent: editorParentRef.current,
