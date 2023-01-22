@@ -11,14 +11,13 @@ function withOpacity(variableName) {
 
 module.exports = {
   mode: 'jit',
-  purge: [`${__dirname}/src/**/*.{js,jsx,ts,tsx}`],
+  content: [`${__dirname}/src/**/*.{js,jsx,ts,tsx}`],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
       colors: {
         refBlockLight: '#f1f5f9',
         refBlockDark: '#161b21',
-        ...colors,
       },
       typography: {
         DEFAULT: {
@@ -88,9 +87,6 @@ module.exports = {
         },
       },
     },
-  },
-  variants: {
-    extend: {},
   },
   plugins: [require('@tailwindcss/typography')],
 };

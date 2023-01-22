@@ -5,13 +5,13 @@
   "version": "1.0.0",
   "author": "phartenfeller",
   "dependencies": {
-    "autoprefixer": "^10.3.7",
-    "gatsby": "^3.14.3",
+    "autoprefixer": "^10.4.13",
+    "gatsby": "^4.25.4",
     "gatsby-philipps-foam-theme": "link:../gatsby-philipps-foam-theme",
-    "gatsby-plugin-postcss": "^4.14.0",
-    "postcss": "^8.3.11",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "gatsby-plugin-postcss": "^5.25.0",
+    "postcss": "^8.4.21",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "keywords": [
     "gatsby"
