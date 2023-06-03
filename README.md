@@ -24,10 +24,9 @@ Changes made to original:
 npm install gatsby-philipps-foam-theme
 ```
 
-## Setup 
+## Setup
 
-Take a look into the [_layouts folder in the example directory](https://github.com/phartenfeller/gatsby-philipps-foam-theme/tree/master/example/_layouts)
-
+Take a look into the [\_layouts folder in the example directory](https://github.com/phartenfeller/gatsby-philipps-foam-theme/tree/master/example/_layouts)
 
 ### Manually add to your site
 
@@ -41,42 +40,42 @@ Take a look into the [_layouts folder in the example directory](https://github.c
 
 2. Add the configuration to your `gatsby-config.js` file
 
-  [Config options explained](https://github.com/phartenfeller/gatsby-philipps-foam-theme/wiki)
+[Config options explained](https://github.com/phartenfeller/gatsby-philipps-foam-theme/wiki)
 
-   ```js
-   // gatsby-config.js
-   module.exports = {
-     plugins: [
-       {
-         resolve: `gatsby-philipps-foam-theme`,
-         options: {
-           // basePath defaults to `/`
-           basePath: `/garden`,
-           rootNote: `/garden/About-these-notes`,
-           contentPath: `/content/garden`,
-         },
-       },
-     ],
-   };
-   ```
-   
-   You can ignore certain folders by adding an "ignore" array to the options:
-   
-   ```js
-   plugins: [
+```js
+// gatsby-config.js
+module.exports = {
+  plugins: [
     {
       resolve: `gatsby-philipps-foam-theme`,
       options: {
-        rootNote: "/readme",
-        contentPath: "/",
-        ignore: [
-          "**/_layouts/**",
-          "**/private/**/*",
-        ],
+        // basePath defaults to `/`
+        basePath: `/garden`,
+        rootNote: `/garden/About-these-notes`,
+        contentPath: `/content/garden`,
       },
     },
-   ],
-   ```
+  ],
+};
+```
+
+You can ignore certain folders by adding an "ignore" array to the options:
+
+```js
+plugins: [
+ {
+   resolve: `gatsby-philipps-foam-theme`,
+   options: {
+     rootNote: "/readme",
+     contentPath: "/",
+     ignore: [
+       "**/_layouts/**",
+       "**/private/**/*",
+     ],
+   },
+ },
+],
+```
 
 3. Add notes to your site by creating `md` or `mdx` files inside `/content/garden`.
 
@@ -115,3 +114,7 @@ To develop run `yarn start`.
    // your own component to inject into mdx
    export code from "./your-component"; // any code block will use this component
    ```
+
+[Karate]
+
+[Karate]: ./example/docs/readme.md
