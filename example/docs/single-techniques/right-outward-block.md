@@ -5,3 +5,13 @@ desc: ''
 updated: 1676843918795
 created: 1676843918795
 ---
+
+## Backlinks
+
+> - [Single Techniques](..\single-techniques.md)
+>   - [[right-outward-block]]
+>    
+> - [](..\techniques\shielding-hammer.md)
+>   - Extended [[right-outward-block]]
+
+_Backlinks last generated 2023-06-03 14:40:30_

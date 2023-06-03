@@ -5,3 +5,16 @@ desc: ""
 updated: 1682626010837
 created: 1682625999780
 ---
+
+## Backlinks
+
+> - [Single Techniques](..\single-techniques.md)
+>   - [[right-upward-forearm-strike]]
+>    
+> - [](..\techniques\lone-kimono.md)
+>   - [[right-upward-forearm-strike]]
+>    
+> - [](..\techniques\twin-kimono.md)
+>   - horizontal [[right-upward-forearm-strike]]
+
+_Backlinks last generated 2023-06-03 14:40:30_
