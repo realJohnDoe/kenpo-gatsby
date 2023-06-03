@@ -7,15 +7,15 @@ require("dotenv").config({
 module.exports = {
   pathPrefix: `/kenpo-gatsby`,
   siteMetadata: {
-    title: `Philipps Foam Template`,
-    description: `Example of using Philipps Foam Template for a Gatsby site`,
+    title: `Johannes' Kenpo notes`,
+    description: `Johannes' Kenpo notes rendered beautifully using Gatsby`,
   },
   plugins: [
     {
       resolve: `gatsby-philipps-foam-theme`,
       options: {
         contentPath: `${__dirname}/../docs`,
-        rootNote: "index.md",
+        rootNote: "index",
         ignore: ["**/private/**/*"],
       },
     },
