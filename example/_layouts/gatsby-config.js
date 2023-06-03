@@ -15,7 +15,7 @@ module.exports = {
       resolve: `gatsby-philipps-foam-theme`,
       options: {
         contentPath: `${__dirname}/../docs`,
-        rootNote: "readme",
+        rootNote: "index.md",
         ignore: ["**/private/**/*"],
       },
     },
