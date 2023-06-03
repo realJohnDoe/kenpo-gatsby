@@ -1,7 +1,7 @@
 ---
 id: bn2iog7qu5y0rrsck93o54k
 title: Raining Claw
-desc: ''
+desc: ""
 updated: 1684179267065
 created: 1684174947962
 ---
@@ -15,6 +15,3 @@ created: 1684174947962
 3. - Shuffle forward
    - Vertical [[hobbies.karate.kenpo.single-techniques.right-back-knuckle]]
 4. [[hobbies.karate.kenpo.single-techniques.cover-right-before-left]] towards 130
-
-
-
