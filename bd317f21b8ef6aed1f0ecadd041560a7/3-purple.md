@@ -6,6 +6,8 @@ updated: 1684180045488
 created: 1682625728876
 ---
 
+# Purple Belt 🟣
+
 - 2. [[techniques/snapping-twig]]
 - 3. [[techniques/leaping-crane]]
 - 20. [[techniques/twin-kimono]]
