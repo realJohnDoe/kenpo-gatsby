@@ -20,4 +20,4 @@ created: 1680799329300
 > - [](..\techniques\twin-kimono.md)
 >   - Outward horizontal [[right-back-knuckle]]
 
-_Backlinks last generated 2023-06-03 14:40:30_
+_Backlinks last generated 2023-06-03 14:52:58_

@@ -14,4 +14,4 @@ created: 1684179237480
 > - [](..\techniques\five-swords.md)
 >   - Snapping [[right-uppercut-punch]]
 
-_Backlinks last generated 2023-06-03 14:40:30_
+_Backlinks last generated 2023-06-03 14:52:58_

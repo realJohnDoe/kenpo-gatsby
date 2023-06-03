@@ -14,4 +14,4 @@ created: 1676843918795
 > - [](..\techniques\shielding-hammer.md)
 >   - Extended [[right-outward-block]]
 
-_Backlinks last generated 2023-06-03 14:40:30_
+_Backlinks last generated 2023-06-03 14:52:58_

@@ -24,4 +24,4 @@ created: 1682624524598
 > - [](..\techniques\twin-kimono.md)
 >   - - Snapping outward [[right-handsword]]
 
-_Backlinks last generated 2023-06-03 14:40:30_
+_Backlinks last generated 2023-06-03 14:52:58_

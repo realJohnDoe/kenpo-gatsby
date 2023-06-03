@@ -14,7 +14,7 @@ created: 1676842411650
 > - [Short Form 1](..\forms\1-short-form-1.md)
 >   - [[right-inward-block]]
 >    
-> - [](..\forms\2-long-form-1.md)
+> - [Long Form 1](..\forms\2-long-form-1.md)
 >   - [[right-inward-block]]
 >   - [[right-inward-block]]
 >    
@@ -27,4 +27,4 @@ created: 1676842411650
 > - [](..\techniques\five-swords.md)
 >   - [[right-inward-block]]
 
-_Backlinks last generated 2023-06-03 14:42:55_
+_Backlinks last generated 2023-06-03 14:52:58_

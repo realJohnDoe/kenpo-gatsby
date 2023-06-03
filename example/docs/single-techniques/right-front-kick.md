@@ -17,4 +17,4 @@ created: 1676842791926
 > - [Delayed Sword ⏰⚔️](..\techniques\delayed-sword.md)
 >   - - [[right-front-kick]]
 
-_Backlinks last generated 2023-06-03 14:40:30_
+_Backlinks last generated 2023-06-03 14:52:58_

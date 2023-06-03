@@ -117,4 +117,4 @@ To develop run `yarn start`.
 
 [Karate]
 
-[Karate]: ./example/docs/readme.md
+[Karate]: ./example/docs/readme

@@ -17,4 +17,4 @@ created: 1682625999780
 > - [](..\techniques\twin-kimono.md)
 >   - horizontal [[right-upward-forearm-strike]]
 
-_Backlinks last generated 2023-06-03 14:40:30_
+_Backlinks last generated 2023-06-03 14:52:58_

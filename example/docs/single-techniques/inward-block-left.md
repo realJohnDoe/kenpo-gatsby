@@ -11,4 +11,4 @@ created: 1684253753185
 > - [Single Techniques](..\single-techniques.md)
 >   - [[inward-block-left]]
 
-_Backlinks last generated 2023-06-03 14:40:30_
+_Backlinks last generated 2023-06-03 14:52:58_
