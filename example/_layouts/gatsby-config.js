@@ -5,7 +5,7 @@ require("dotenv").config({
 });
 
 module.exports = {
-  pathPrefix: `/gatsby-philipps-foam-theme`,
+  pathPrefix: `/kenpo-gatsby`,
   siteMetadata: {
     title: `Philipps Foam Template`,
     description: `Example of using Philipps Foam Template for a Gatsby site`,
